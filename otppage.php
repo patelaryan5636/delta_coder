@@ -170,7 +170,7 @@
 
         // Redirect to userregister.php after 2 minutes
         setTimeout(function () {
-            window.location.href = "userregister";
+            window.location.href = "sign-up";
         }, 60000); // 120,000 milliseconds = 2 minutes
 
         // Function to fade out messages after 5 seconds

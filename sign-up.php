@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,26 +17,26 @@
 
 <body>
     <div class="container">
-        <form action="includes/scripts/signmeup.php" method="post" class="login" id="signupform">
+        <form action="process_register" method="post" class="login" id="signupform">
             <div class="main">
                 <div class="heading">
                     <h1>Sign up</h1>
                 </div>
                 <h4>
                     <?php
-                    session_start();
-                        if (isset($_SESSION['educat_error_message'])){
-                            echo "<a>" . $_SESSION['educat_error_message'] . "</a>";
-                            unset($_SESSION['educat_error_message']);
+                    
+                        if (isset($_SESSION['error_messages'])){
+                            echo "<a>" . $_SESSION['error_messages'] . "</a>";
+                            unset($_SESSION['error_messages']);
                         }
                     ?>
                 </h4>
                 <div class="inputs">
-                    <input type="text" name="user_username" class="input" placeholder="User Name"
+                    <input type="text" name="username" class="input" placeholder="User Name"
                         title="Please enter a valid name without numbers" autofocus required>
                     <input type="text" name="fullname" class="input" placeholder="Full Name"
                         title="Please enter a valid name without numbers" required>
-                    <input type="number" name="phone_number" class="input" placeholder="Phone Number"
+                    <input type="number" name="mobile" class="input" placeholder="Phone Number"
                         pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" required>
                     <select name="gender" class="input" style="width: 75%;" required>
                         <option value="" disabled selected>Select Gender</option>
@@ -41,12 +44,12 @@
                         <option value="female">Female</option>
                         <option value="other">Other</option>
                     </select>
-                    <input type="email" name="educat_user_email" class="input" placeholder="Email" id="emailID"
+                    <input type="email" name="email" class="input" placeholder="Email" id="emailID"
                         required>
                     <span id="emailError" class="error"></span>
-                    <input type="password" name="educat_user_password" class="input" placeholder="Password"
+                    <input type="password" name="password" class="input" placeholder="Password"
                         pattern=".{8,}" title="Password must be at least 8 characters long" id="password" required>
-                    <input type="password" name="educat_user_confirm_password" class="input"
+                    <input type="password" name="confirm_password" class="input"
                         placeholder="Confirm password" pattern=".{8,}"
                         title="Password must be at least 8 characters long" oninput="checkPasswordMatch()"
                         id="confirm-password" required>
