@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2025 at 08:07 PM
+-- Generation Time: Apr 11, 2025 at 08:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -14,6 +14,7 @@ SET time_zone = "+00:00";
 DROP DATABASE IF EXISTS `pascal`;
 CREATE DATABASE `pascal`;
 USE `pascal`;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -50,6 +51,24 @@ CREATE TABLE `checklist_items` (
   `note` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `credential`
+--
+
+CREATE TABLE `credential` (
+  `key` varchar(50) NOT NULL,
+  `value` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `credential`
+--
+
+INSERT INTO `credential` (`key`, `value`) VALUES
+('mail', 'xarq luyb tkix qwey');
 
 -- --------------------------------------------------------
 
