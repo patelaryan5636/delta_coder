@@ -108,6 +108,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare("INSERT INTO otp_verifications (email, otp) VALUES (?, ?)");
     $stmt->bind_param("ss", $email, $otp);
     
+    $sql = "Select * from credential from pacpal where key = 'mail' ";
+    $result = mysqli_query($conn,$sql);
+    $data = mysqli_fetch_assoc($result);
+    $password = $data['value'];
+
     if ($stmt->execute()) {
         // Send OTP via Email using PHPMailer
         $mail = new PHPMailer(true);
@@ -116,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Host = 'smtp.gmail.com'; // SMTP host
             $mail->SMTPAuth = true;
             $mail->Username = 'patelaryan5636@gmail.com'; // Your email
-            $mail->Password = 'xarq luyb tkix qwey'; // Your email app password
+            $mail->Password = $password; // Your email app password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 

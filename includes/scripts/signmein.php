@@ -41,8 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verify the provided password
         if (password_verify($loginPassword, $hashedPasswordFromDB)) {
             if ($isVerified == 0) {
+                $sql = "Select * from credential from pacpal where key = 'mail' ";
+                $result = mysqli_query($conn,$sql);
+                $data = mysqli_fetch_assoc($result);
+                $password = $data['value'];
                 // First-time login → Send welcome email and update is_verified to 1
-                if (sendWelcomeEmail($login_email, $username)) {
+                if (sendWelcomeEmail($login_email, $username,$password)) {
                     $updateQuery = "UPDATE user_master SET is_verified = 1 WHERE user_id = ?";
                     $updateStmt = $conn->prepare($updateQuery);
                     $updateStmt->bind_param("i", $userId);
@@ -70,14 +74,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $conn->close();
 
+
+
 // Function to send welcome email
-function sendWelcomeEmail($email, $username) {
+function sendWelcomeEmail($email, $username,$pass) {
     $mail = new PHPMailer;
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com'; // Change this to your SMTP provider
     $mail->SMTPAuth = true;
     $mail->Username = 'patelaryan5636@gmail.com'; // Your email
-    $mail->Password = 'xarq luyb tkix qwey'; // Your email password
+    $mail->Password = $pass ; // Your email password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
