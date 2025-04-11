@@ -4,7 +4,7 @@
 
 //$hostname = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
 
-$conn = new mysqli("localhost","root","","delta");
+$conn = new mysqli("localhost","root","","pacpal");
 
 
 // Check connection
