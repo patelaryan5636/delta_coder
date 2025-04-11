@@ -23,7 +23,7 @@ body {
     width: 95.5%;
     height: 91%;
     border-radius: 25px;
-    background-color: rgba(247, 247, 247, 0.555);
+    background-color: #f7f7f78e;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -61,7 +61,8 @@ h1 {
 }
 
 
-.input:focus {
+
+.input-radio:focus {
     box-shadow: 0px 0px 10px 2px rgb(199, 199, 199);
     border-color: #fca311;
     outline: none;

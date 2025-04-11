@@ -29,9 +29,20 @@
                     ?>
                 </h4>
                 <div class="inputs">
-                    <input type="text" name="user_username" class="input" placeholder="User Name" title="Please enter a valid name without numbers" autofocus required>
-                    <input type="text" name="fullname" class="input" placeholder="Full Name" title="Please enter a valid name without numbers" autofocus required>
-                    <input type="email" name="educat_user_email" class="input" placeholder="Email" id="emailID" required>
+                    <input type="text" name="user_username" class="input" placeholder="User Name"
+                        title="Please enter a valid name without numbers" autofocus required>
+                    <input type="text" name="fullname" class="input" placeholder="Full Name"
+                        title="Please enter a valid name without numbers" required>
+                    <input type="number" name="phone_number" class="input" placeholder="Phone Number"
+                        pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" required>
+                    <select name="gender" class="input" style="width: 75%;" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="email" name="educat_user_email" class="input" placeholder="Email" id="emailID"
+                        required>
                     <span id="emailError" class="error"></span>
                     <input type="password" name="educat_user_password" class="input" placeholder="Password"
                         pattern=".{8,}" title="Password must be at least 8 characters long" id="password" required>
@@ -66,7 +77,29 @@
             }
         }
     </script>
+    <script>
+        document.getElementById('signupform').addEventListener('input', function (event) {
+            const phoneInput = document.querySelector('input[name="phone_number"]');
+            const phoneError = document.getElementById('phoneError');
 
+            if (!phoneError) {
+                const errorSpan = document.createElement('span');
+                errorSpan.id = 'phoneError';
+                errorSpan.className = 'error';
+                phoneInput.insertAdjacentElement('afterend', errorSpan);
+            }
+
+            if (phoneInput.value.length > 10) {
+                phoneInput.value = phoneInput.value.slice(0, 10);
+            }
+
+            if (phoneInput.value.length < 10 && phoneInput.value.length > 0) {
+                // document.getElementById('phoneError').textContent = 'Phone number must be 10 digits.';
+            } else {
+                document.getElementById('phoneError').textContent = '';
+            }
+        });
+    </script>
     <script>
         // document.getElementById('signupform').addEventListener('submit', function (event) {
         //     // Prevent the form from submitting

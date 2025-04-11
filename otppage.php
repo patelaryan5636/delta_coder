@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,66 +30,72 @@
     </style>
 </head>
 
-<body class="bg-image flex items-center justify-center">
-    <div class="bg-[#F8F6F4] shadow-lg rounded-lg p-8 w-96 text-center">
-        <img src="gandiv.png" alt="Logo" class="h-12 mx-auto mb-4" />
-
-        <h2 class="text-2xl font-bold text-gray-800">Enter OTP</h2>
-        <p class="text-gray-600 text-sm">
-            We have sent a verification code to your email
-        </p>
-
-        <!-- Display Error Message if OTP doesn't match -->
-        <br>
-        <?php if(isset($_SESSION['otp_error'])): ?>
-        <div id="otpError"
-            class="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 rounded-lg shadow-md mb-4 transition-opacity duration-500">
-            <strong class="block font-semibold">⚠️ Error!</strong>
-            <p class="mt-2 text-sm">
-                <?php echo $_SESSION['otp_error']; ?>
-            </p>
+<body class="bg-image flex items-center justify-evenly p-9">
+    <div class="flex items-center justify-evenly h-full w-full bg-[#f7f7f78e] rounded-lg">
+        <div>
+            <dotlottie-player src="https://lottie.host/cc015a4e-6bc1-4412-97a7-105e28a805bc/pOIAsU6wOG.lottie"
+                background="transparent" speed="1" style="width: 350px; height: 350px" loop autoplay></dotlottie-player>
         </div>
-        <?php unset($_SESSION['otp_error']); // Clear the error message after displaying ?>
-        <?php endif; ?>
+        <div class="bg-[#F8F6F4] shadow-lg rounded-lg p-8 w-96 text-center">
+            <img src="./assets/img/Black Yellow White Circle Badge illustration Simple Tour & Travel Logo.png"
+                alt="Logo" class="h-20 mx-auto mb-4" />
 
-        <?php if(isset($_SESSION['otp_success'])): ?>
-        <div id="otpSuccess"
-            class="bg-green-100 border-l-4 border-green-500 text-green-700 p-3 rounded-lg shadow-md mb-4 transition-opacity duration-500">
-            <strong class="block font-semibold">✅ OTP Sent!</strong>
-            <p class="mt-2 text-sm">
-                <?php echo $_SESSION['otp_success']; ?>
+            <h2 class="text-2xl font-bold text-gray-800">Enter OTP</h2>
+            <p class="text-gray-600 text-sm">
+                We have sent a verification code to your email
             </p>
-        </div>
-        <?php unset($_SESSION['otp_success']); // Clear message after displaying ?>
-        <?php endif; ?>
 
-        <p id="otpMessage" class="text-sm text-green-500 mt-2"></p>
-
-        <!-- OTP FORM -->
-        <form action="verify_otp.php" method="POST">
-            <div class="flex justify-center gap-3 mt-6">
-                <input type="text" maxlength="1" class="otp-input" id="otp1" required oninput="moveNext(1)"
-                    onkeydown="handleBackspace(event, 1)">
-                <input type="text" maxlength="1" class="otp-input" id="otp2" required oninput="moveNext(2)"
-                    onkeydown="handleBackspace(event, 2)">
-                <input type="text" maxlength="1" class="otp-input" id="otp3" required oninput="moveNext(3)"
-                    onkeydown="handleBackspace(event, 3)">
-                <input type="text" maxlength="1" class="otp-input" id="otp4" required oninput="moveNext(4)"
-                    onkeydown="handleBackspace(event, 4)">
+            <!-- Display Error Message if OTP doesn't match -->
+            <br>
+            <?php if(isset($_SESSION['otp_error'])): ?>
+            <div id="otpError"
+                class="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 rounded-lg shadow-md mb-4 transition-opacity duration-500">
+                <strong class="block font-semibold">⚠️ Error!</strong>
+                <p class="mt-2 text-sm">
+                    <?php echo $_SESSION['otp_error']; ?>
+                </p>
             </div>
-            <input type="hidden" name="otp" id="otp-hidden">
+            <?php unset($_SESSION['otp_error']); // Clear the error message after displaying ?>
+            <?php endif; ?>
 
-            <button type="submit"
-                class="w-full mt-5 bg-[#C4DFDF] text-gray-600 py-2 rounded-lg text-lg hover:bg-[#D2E9E9] transition">
-                Verify OTP →
-            </button>
-        </form>
+            <?php if(isset($_SESSION['otp_success'])): ?>
+            <div id="otpSuccess"
+                class="bg-green-100 border-l-4 border-green-500 text-green-700 p-3 rounded-lg shadow-md mb-4 transition-opacity duration-500">
+                <strong class="block font-semibold">✅ OTP Sent!</strong>
+                <p class="mt-2 text-sm">
+                    <?php echo $_SESSION['otp_success']; ?>
+                </p>
+            </div>
+            <?php unset($_SESSION['otp_success']); // Clear message after displaying ?>
+            <?php endif; ?>
 
-        <p class="text-sm text-gray-600 mt-4">
-            Didn’t receive a code? <a href="#" id="resendOtp" class="text-blue-500">Resend OTP</a>
-        </p>
+            <p id="otpMessage" class="text-sm text-green-500 mt-2"></p>
+
+            <!-- OTP FORM -->
+            <form action="verify_otp.php" method="POST">
+                <div class="flex justify-center gap-3 mt-1">
+                    <input type="text" maxlength="1" class="otp-input" id="otp1" required oninput="moveNext(1)"
+                        onkeydown="handleBackspace(event, 1)">
+                    <input type="text" maxlength="1" class="otp-input" id="otp2" required oninput="moveNext(2)"
+                        onkeydown="handleBackspace(event, 2)">
+                    <input type="text" maxlength="1" class="otp-input" id="otp3" required oninput="moveNext(3)"
+                        onkeydown="handleBackspace(event, 3)">
+                    <input type="text" maxlength="1" class="otp-input" id="otp4" required oninput="moveNext(4)"
+                        onkeydown="handleBackspace(event, 4)">
+                </div>
+                <input type="hidden" name="otp" id="otp-hidden">
+
+                <button type="submit"
+                    class="w-full mt-5 bg-[#C4DFDF] text-gray-600 py-2 rounded-lg text-lg hover:bg-[#D2E9E9] transition">
+                    Verify OTP →
+                </button>
+            </form>
+
+            <p class="text-sm text-gray-600 mt-4">
+                Didn’t receive a code? <a href="#" id="resendOtp" class="text-blue-500">Resend OTP</a>
+            </p>
+        </div>
     </div>
-
 
     <script>
         // Function to move focus to the next OTP input
@@ -189,5 +194,6 @@
 
 
 </body>
+<script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 
 </html>
