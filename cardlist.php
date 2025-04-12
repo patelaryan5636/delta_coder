@@ -147,15 +147,24 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
             <h1 class="no-result">No Group Found</h1>
             <?php
-        $result = $conn->query("SELECT * FROM group_master where created_by = '$user_id'");
+        $result = $conn->query("SELECT * FROM user_group_roles where user_id = '$user_id'");
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 $group_id = $row['group_id'];
-              $groupName = $row['group_name'];
-              $ownerId = $row['created_by'];
-              $createdOn = date("F j, Y", strtotime($row['created_at']));
-              $status = isset($row['status']) ? $row['status'] : 'ACTIVE'; // fallback
+
+                $sql = "SELECT * FROM group_master WHERE group_id = '$group_id'";
+                $result1 = $conn->query($sql); 
+                if ($result1->num_rows > 0) {
+                    $row1 = $result1->fetch_assoc();
+                    $groupName = $row1['group_name'];
+                    $ownerId = $row1['created_by'];
+                    $createdOn = date("F j, Y", strtotime($row1['created_at']));
+                    $status = isset($row1['status']) ? $row1['status'] : 'ACTIVE'; // fallback
+                } else {
+                    continue; // Skip if no group found
+                }   
+            
           
               // Fetch owner's name
               $ownerName = "Unknown";
@@ -203,14 +212,22 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                         </div>
                     </div>
                     <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <button
+                        <a href="assign_checklist.php?group_id=<?= $group_id ?>"
                             class="btn bg-primary text-white px-3 py-2 rounded-button flex items-center whitespace-nowrap shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30">
                             <i class="ri-eye-line mr-1.5"></i> View Details
-                        </button>
+                        </a>
                         <div class="flex space-x-2">
                             <a href="editgroup.php?id=<?= $group_id ?>"
                                 class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
                                 <i class="ri-edit-line"></i>
+                            </a>
+                            <a href="checklist_view.php?group_id=<?= $group_id ?>"
+                                class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
+                                <i class="ri-edit-line"></i>
+                            </a>
+                            <a href="add_category.php?group_id=<?= $group_id ?>"
+                                class="btn bg-red-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
+                                <i class="ri-delete-bin-line"></i>
                             </a>
                             <button
                                 class="btn bg-red-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
