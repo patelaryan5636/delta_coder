@@ -1,11 +1,23 @@
 <?php
 session_start();
-include '../includes/db.php';
+include 'includes/scripts/connection.php';
+if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedin_user_id']) !== '')){
+    $user_id = $_SESSION['pacpal_logedin_user_id'];
+    $query = "SELECT * FROM user_master WHERE user_id = $user_id";
+    $result = mysqli_query($conn, $query);
+    $userdata = mysqli_fetch_assoc($result);
+    $user_role = $userdata["user_role"];
+    if($user_role != 3){
+        header("Location: 404.php");
+    }
+  } else {
+    header("Location: sign-in.php");
+  }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $group_name = trim($_POST['group_name']);
     $group_description = trim($_POST['group_description']);
-    $owner_user_id = $_SESSION['user_id']; // Assuming user is logged in and ID is stored in session
+    $owner_user_id = $user_id; // Assuming user is logged in and ID is stored in session
 
     if (empty($group_name) || empty($group_description)) {
         die("<script>alert('Group name and description are required.'); window.history.back();</script>");
@@ -47,9 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
     }
 
-    if (count($valid_members) === 0) {
-        die("<script>alert('At least one member must be selected.'); window.history.back();</script>");
-    }
+    // if (count($valid_members) === 0) {
+    //     die("<script>alert('At least one member must be selected.'); window.history.back();</script>");
+    // }
 
     if ($admin_count > 1) {
         die("<script>alert('Only one admin is allowed (besides you).'); window.history.back();</script>");
@@ -63,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     // Insert owner as admin in group_user_roles
-    $stmt2 = $conn->prepare("INSERT INTO group_user_roles (group_id, user_id, role) VALUES (?, ?, ?)");
+    $stmt2 = $conn->prepare("INSERT INTO user_group_roles (group_id, user_id, role) VALUES (?, ?, ?)");
     $owner_role = "admin";
     $stmt2->bind_param("iis", $group_id, $owner_user_id, $owner_role);
     $stmt2->execute();
@@ -77,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt2->close();
     $conn->close();
 
-    echo "<script>alert('Group created successfully!'); window.location.href='group_list.php';</script>";
+    echo "<script>alert('Group created successfully!'); window.location.href='cardlist.php';</script>";
 } else {
     echo "Invalid Request.";
 }

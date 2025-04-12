@@ -18,8 +18,7 @@
 <body>
     <div class="container">
         <div class="leftimg">
-            <dotlottie-player src="https://lottie.host/1cd039a3-b625-490a-82da-0ab7a261f20b/IrcoiR4rNj.lottie"
-                background="transparent" speed="1" style="width: 350px; height: 350px" loop autoplay></dotlottie-player>
+        <dotlottie-player src="https://lottie.host/676b8bb3-014c-49f2-a3c9-b27ffc93e8b0/WXRPJ4KQTg.lottie" background="transparent" speed="1" style="width: 400px; height: 400px" loop autoplay></dotlottie-player>
         </div>
         <form action="includes/scripts/signmein.php" method="post" class="login">
             <div class="main">

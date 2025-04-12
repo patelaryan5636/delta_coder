@@ -273,8 +273,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             const form1 = document.getElementById('form1');
             const form2 = document.getElementById('form2');
             const nextBtn = document.getElementById('nextBtn');
-            const backBtn = document.getElementById('backBtn');
-            const submitBtn = document.getElementById('submitBtn');
+            const backBtn = document.getElementById('backBtn'); 
             const step1 = document.getElementById('step1');
             const step2 = document.getElementById('step2');
             const stepConnector = document.getElementById('step-connector');
@@ -440,28 +439,89 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                 return count > 1;
             }
             // Submit form
-            submitBtn.addEventListener('click', function () {
-                const successDialog = document.createElement('div');
-                successDialog.className = 'fixed inset-0 flex items-center justify-center z-50';
-                successDialog.innerHTML = `
-<div class="fixed inset-0 bg-black opacity-50"></div>
-<div class="bg-white rounded-lg p-4 sm:p-6 relative z-10 max-w-sm w-full mx-4">
-<div class="text-center">
-<div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-<i class="ri-check-line text-green-500 ri-2x"></i>
-</div>
-<h3 class="text-lg font-medium mb-2">Success!</h3>
-<p class="text-gray-600 mb-6">Your group has been created successfully.</p>
-<button class="bg-primary text-white px-6 py-2 rounded !rounded-button">OK</button>
-</div>
-</div>
-`;
-                document.body.appendChild(successDialog);
-                successDialog.querySelector('button').addEventListener('click', () => {
-                    successDialog.remove();
-                });
-            });
+            
         });
+
+// Form submission handler
+submitBtn.addEventListener('click', async function(e) {
+    e.preventDefault();
+    
+    // Validate form
+    if (!validateForm()) {
+        return;
+    }
+    
+    // Show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+        <div class="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full mr-2"></div>
+        Creating Group...
+    `;
+    
+    try {
+        // Collect form data
+        const formData = new FormData();
+        const groupData = {
+            groupName: document.getElementById('groupName').value.trim(),
+            groupDescription: document.getElementById('groupDescription').value.trim(),
+            members: [],
+            created_at: '2025-04-12 11:52:32', // Current UTC time
+            created_by: 'Rangat001' // Current user
+        };
+        
+        // Collect members data
+        document.querySelectorAll('.member-row').forEach(row => {
+            const username = row.querySelector('.username-input').value.trim();
+            const role = row.querySelector('.role-input').value;
+            
+            if (username && role) {
+                groupData.members.push({ username, role });
+            }
+        });
+        
+        // Convert to JSON string
+        formData.append('groupName', groupData.groupName);
+        formData.append('groupDescription', groupData.groupDescription);
+        formData.append('members', JSON.stringify(groupData.members));
+        formData.append('created_at', groupData.created_at);
+        formData.append('created_by', groupData.created_by);
+        
+        // Send request
+        const response = await fetch('process_create_group.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        // Parse response
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+            // Store group data in session storage for process page
+            sessionStorage.setItem('groupData', JSON.stringify({
+                ...groupData,
+                group_id: result.data.group_id
+            }));
+            
+            // Redirect to process page
+            window.location.href = 'process.php';
+        } else {
+            throw new Error(result.message || 'Failed to create group');
+        }
+        
+    } catch (error) {
+        console.error('Error:', error);
+        showNotification('Error', error.message || 'Failed to create group', 'error');
+    } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+            Create Group
+            <div class="w-5 h-5 flex items-center justify-center ml-1">
+                <i class="ri-check-line"></i>
+            </div>
+        `;
+    }
+});
     </script>
 </body>
 

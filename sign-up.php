@@ -12,7 +12,7 @@ session_start();
     <link rel="shortcut icon" type="image/x-icon" href="./assets/img/EduCat (4)_rm.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/login.css">
-    <title>Sign up</title>
+    <title>Sign Up</title>
 </head>
 
 <body>
@@ -20,7 +20,7 @@ session_start();
         <form action="process_register" method="post" class="login" id="signupform">
             <div class="main">
                 <div class="heading">
-                    <h1>Sign up</h1>
+                    <h1>Sign Up</h1>
                 </div>
                 <h4>
                     <?php
