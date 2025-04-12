@@ -107,11 +107,14 @@
                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-button pl-10 pr-4 py-2.5 w-full sm:min-w-[16rem]"
                         placeholder="Search groups...">
                 </div>
-                <button
-                    class="bg-primary text-white px-4 py-2.5 rounded-button flex items-center justify-center whitespace-nowrap shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300">
-                    <i class="ri-add-line mr-2"></i>
-                    Create New Group
-                </button>
+                <a href="tripform">
+
+                    <button
+                        class="bg-primary text-white px-4 py-2.5 rounded-button flex items-center justify-center whitespace-nowrap shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300">
+                        <i class="ri-add-line mr-2"></i>
+                        Create New Group
+                    </button>
+                </a>
             </div>
         </div>
         <!-- Filters -->

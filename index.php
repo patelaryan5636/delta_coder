@@ -57,10 +57,10 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             <h1 class="text-2xl font-['Pacifico'] text-primary">PackPal</h1>
         </div>
         <div class="flex items-center">
-            <a href="cardlist.html" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">DashBorad</a>
+            <a href="cardlist" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">DashBorad</a>
                 <a href="sign-in.php" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Sign
                 In</a>
-            <a href="sign-up.php"
+            <a href="sign-up"
                 class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all">Sign
                 Up</a>
         </div>
