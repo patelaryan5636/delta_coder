@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $updateStmt->bind_param("i", $userId);
                     $updateStmt->execute();
 
-                    $_SESSION['Yatra_success_message'] = "🎉 Welcome, $username! Your account is now verified.";
+                    $_SESSION['Yatra_success_message'] = " Welcome, $username! Your account is now verified.";
                 }
             }
 
@@ -91,8 +91,8 @@ function sendWelcomeEmail($email, $username,$pass) {
     $mail->setFrom('patelaryan5636@gmail.com', 'Pacpal Support');
     $mail->addAddress($email);
     $mail->isHTML(true);
-
-    $mail->Subject = '🎉 Welcome to PackPal, ' . $username . '!';
+    $mail->CharSet = 'UTF-8'; // Important for emoji support
+    $mail->Subject = "🎉 Welcome to PackPal, {$username}!";
 
     $mail->Body = "
         <div style='font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 10px; color: #333;'>
