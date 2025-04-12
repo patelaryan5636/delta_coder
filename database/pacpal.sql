@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2025 at 03:45 PM
+-- Generation Time: Apr 12, 2025 at 10:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -11,9 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-DROP DATABASE IF EXISTS `pacpal`;
-CREATE DATABASE `pacpal`;
-USE `pacpal`;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -21,6 +19,9 @@ USE `pacpal`;
 
 --
 -- Database: `pacpal`
+DROP DATABASE IF EXISTS `pacpal`;
+CREATE DATABASE `pacpal`;
+USE `pacpal`;
 --
 
 -- --------------------------------------------------------
@@ -35,6 +36,17 @@ CREATE TABLE `checklist_categories` (
   `category_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `checklist_categories`
+--
+
+INSERT INTO `checklist_categories` (`cc_id`, `group_id`, `category_name`) VALUES
+(1, 10, 'Java advanced'),
+(2, 10, 'django'),
+(3, 11, 'testing category'),
+(4, 11, 'pyrs'),
+(5, 11, 'arara');
+
 -- --------------------------------------------------------
 
 --
@@ -42,14 +54,22 @@ CREATE TABLE `checklist_categories` (
 --
 
 CREATE TABLE `checklist_items` (
-  `ci_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `item_name` varchar(255) NOT NULL,
   `assigned_to` int(11) DEFAULT NULL,
-  `status` enum('Not Started','Started','Completed') DEFAULT 'Not Started',
+  `status` enum('Not Started','Packed','Delivered') DEFAULT 'Not Started',
   `note` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `checklist_items`
+--
+
+INSERT INTO `checklist_items` (`id`, `category_id`, `item_name`, `assigned_to`, `status`, `note`, `created_at`) VALUES
+(3, 1, 'kapda', 3, NULL, 'dsds', '2025-04-12 19:11:42'),
+(4, 3, 'kapda leto aavje', 4, NULL, 'only sasta', '2025-04-12 20:15:21');
 
 -- --------------------------------------------------------
 
@@ -88,7 +108,8 @@ CREATE TABLE `group_master` (
 --
 
 INSERT INTO `group_master` (`group_id`, `group_name`, `group_description`, `created_by`, `created_at`) VALUES
-(4, 'aryan', 'asds', NULL, '2025-04-12 12:11:18');
+(10, 'aryan', '5636', 3, '2025-04-12 18:31:45'),
+(11, 'chalo testing karie', 'badhe nasto laine aavo', 3, '2025-04-12 20:11:49');
 
 -- --------------------------------------------------------
 
@@ -121,7 +142,12 @@ CREATE TABLE `user_group_roles` (
 --
 
 INSERT INTO `user_group_roles` (`ugr_id`, `user_id`, `group_id`, `role`) VALUES
-(4, 1, 4, 'Admin');
+(10, 3, 10, 'Owner'),
+(11, 1, 10, 'Admin'),
+(12, 3, 11, 'Owner'),
+(13, 4, 11, 'Member'),
+(14, 1, 11, 'Viewer'),
+(15, 6, 11, 'Admin');
 
 -- --------------------------------------------------------
 
@@ -147,7 +173,9 @@ CREATE TABLE `user_master` (
 
 INSERT INTO `user_master` (`user_id`, `user_name`, `email`, `password`, `user_role`, `joined_date`, `full_name`, `phone`, `is_verified`) VALUES
 (1, '21504087', 'sachaniaryan675@gmail.com', '$2y$10$gd6ttO7ZFsi/fG5Jq8eOQuzZrqgnlnxHHd2drg1p26h0.y0svsWVK', 3, 1744438523, '0', 6353054338, 1),
-(3, 'aryan5636', 'patelaryan5636@gmail.com', '$2y$10$HP/imcCgff24JjvX92Hyi.cSZs3XY8xh0bb8KLAkug4gV2brcjeeq', 3, 1744461200, '0', 9537001611, 1);
+(3, 'aryan5636', 'patelaryan5636@gmail.com', '$2y$10$HP/imcCgff24JjvX92Hyi.cSZs3XY8xh0bb8KLAkug4gV2brcjeeq', 3, 1744461200, '0', 9537001611, 1),
+(4, 'aryanpatel', 'rangatprajapati@gmail.com', '$2y$10$glYyFiFefsbBtU1465tJB.8b.ecOH5dXgZADtq1xmuN4hBEOJPx4y', 3, 1744488496, '0', 5636563656, 1),
+(6, 'admin123', 'aryanpatel@gmail.com', '$2y$10$Zq0bxSpYQVkqwWGGfJzyxOPGWzuO5wdFF3DIj1DRYoghX4ePruDEO', 3, 1744488592, '0', 6353054336, 1);
 
 --
 -- Indexes for dumped tables
@@ -164,7 +192,7 @@ ALTER TABLE `checklist_categories`
 -- Indexes for table `checklist_items`
 --
 ALTER TABLE `checklist_items`
-  ADD PRIMARY KEY (`ci_id`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `category_id` (`category_id`),
   ADD KEY `assigned_to` (`assigned_to`);
 
@@ -199,31 +227,31 @@ ALTER TABLE `user_master`
 -- AUTO_INCREMENT for table `checklist_categories`
 --
 ALTER TABLE `checklist_categories`
-  MODIFY `cc_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `checklist_items`
 --
 ALTER TABLE `checklist_items`
-  MODIFY `ci_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `group_master`
 --
 ALTER TABLE `group_master`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user_group_roles`
 --
 ALTER TABLE `user_group_roles`
-  MODIFY `ugr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ugr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user_master`
 --
 ALTER TABLE `user_master`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
