@@ -41,12 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verify the provided password
         if (password_verify($loginPassword, $hashedPasswordFromDB)) {
             if ($isVerified == 0) {
-                $sql = "Select * from credential from pacpal where key = 'mail' ";
-                $result = mysqli_query($conn,$sql);
+                $sql = "SELECT value FROM credential WHERE `key` = 'mail'";
+                $result = mysqli_query($conn, $sql);
                 $data = mysqli_fetch_assoc($result);
-                $password = $data['value'];
+                $mail_password = $data['value'];
+
                 // First-time login → Send welcome email and update is_verified to 1
-                if (sendWelcomeEmail($login_email, $username,$password)) {
+                if (sendWelcomeEmail($login_email, $username,$mail_password)) {
                     $updateQuery = "UPDATE user_master SET is_verified = 1 WHERE user_id = ?";
                     $updateStmt = $conn->prepare($updateQuery);
                     $updateStmt->bind_param("i", $userId);
@@ -91,18 +92,46 @@ function sendWelcomeEmail($email, $username,$pass) {
     $mail->addAddress($email);
     $mail->isHTML(true);
 
-    $mail->Subject = '&#127881; Welcome to Pacpal!';
+    $mail->Subject = '🎉 Welcome to PackPal, ' . $username . '!';
+
     $mail->Body = "
-        <h2 style='color: #2c7865;'> Welcome to Pacpal, $username!</h2>
-        <p>We're excited to have you on board. Now you can explore amazing travel experiences with Yatra.</p>
-        <p><strong>Your account has been successfully verified.</strong></p>
-        <p>Start your journey today!</p>
-        <a href='https://yourwebsite.com/login' style='background: #2c7865; color: #fff; padding: 10px 15px; border-radius: 5px; text-decoration: none;'>Login to Your Account</a>
-        <br><br>
-        <p>If you have any questions, feel free to reach out to our support team.</p>
-        <p>Happy Travelling! 🌍✨</p>
+        <div style='font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 10px; color: #333;'>
+            <h2 style='color: #2c7865;'>Welcome to PackPal, {$username}! 🎒</h2>
+
+            <p style='font-size: 16px; line-height: 1.6;'>
+                We’re thrilled to have you join <strong>PackPal</strong> — your smart assistant for organizing group packing and travel plans with ease.
+            </p>
+
+            <p style='font-size: 16px; line-height: 1.6;'>
+                <strong>Your account has been successfully verified!</strong><br>
+                You’re now ready to create or join travel groups, assign checklist items, and collaborate seamlessly with your crew.
+            </p>
+
+            <div style='text-align: center; margin: 30px 0;'>
+                <a href='https://yourwebsite.com/login' 
+                   style='background-color: #2c7865; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;'>
+                   Login to Your Account
+                </a>
+            </div>
+
+            <p style='font-size: 14px; color: #555;'>
+                Have any questions? Our support team is just a message away.
+            </p>
+
+            <p style='font-size: 14px; color: #555;'>
+                Here's to stress-free travel planning. ✈️🌍<br>
+                Let PackPal handle the logistics while you enjoy the journey!
+            </p>
+
+            <hr style='margin-top: 30px; border: none; border-top: 1px solid #ccc;'>
+
+            <p style='font-size: 12px; color: #999;'>
+                &copy; " . date('Y') . " PackPal. All rights reserved.
+            </p>
+        </div>
     ";
 
     return $mail->send();
+    
 }
 ?>
