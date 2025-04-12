@@ -29,6 +29,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.cdnfonts.com/css/agbalumo');
 
         :where([class^="ri-"])::before {
             content: "\f3c2";
@@ -86,6 +87,18 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
+
+        .no-result {
+            font-family: 'Agbalumo', sans-serif;
+            font-size: 4vw;
+            color: #558490;
+
+            display: none;
+            /* Hidden by default */
+            grid-column: 1 / -1;
+            /* Span all columns */
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -130,34 +143,10 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                 </a>
             </div>
         </div>
-        <!-- Filters -->
-        <div
-            class="flex flex-wrap gap-2 sm:gap-3 mb-6 p-3 sm:p-4 bg-white/50 rounded-lg backdrop-blur-sm overflow-x-auto">
-            <button
-                class="filter-btn bg-primary bg-opacity-10 text-primary px-4 py-2 rounded-button flex items-center whitespace-nowrap shadow-sm shadow-primary/10">
-                <i class="ri-filter-3-line mr-2"></i>
-                All Groups
-            </button>
-            <button
-                class="bg-white text-gray-700 px-4 py-2 rounded-button border border-gray-300 flex items-center whitespace-nowrap">
-                <i class="ri-time-line mr-2"></i>
-                Recent
-            </button>
-            <button
-                class="bg-white text-gray-700 px-4 py-2 rounded-button border border-gray-300 flex items-center whitespace-nowrap">
-                <i class="ri-user-star-line mr-2"></i>
-                Created by Me
-            </button>
-            <button
-                class="bg-white text-gray-700 px-4 py-2 rounded-button border border-gray-300 flex items-center whitespace-nowrap">
-                <i class="ri-calendar-line mr-2"></i>
-                Upcoming
-            </button>
-        </div>
         <!-- Group Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
-
-        <?php
+            <h1 class="no-result">No Group Found</h1>
+            <?php
         $result = $conn->query("SELECT * FROM group_master where created_by = '$user_id'");
 
         if ($result->num_rows > 0) {
@@ -176,216 +165,296 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                 $ownerName = $row2['user_name'];
               }
           ?>
-          
-          <div class="card bg-white rounded-lg shadow-sm overflow-hidden backdrop-blur-sm bg-white/90">
-            <div class="p-4 sm:p-6">
-              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-4">
-                <h3 class="text-xl font-semibold text-gray-800"><?php echo htmlspecialchars($groupName); ?></h3>
-                <span class="status-badge bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full shadow-sm shadow-green-100/50">
-                  <?php echo htmlspecialchars($status); ?>
-                </span>
-              </div>
-              <div class="space-y-3 mb-6">
-                <div class="flex items-center">
-                  <div class="w-5 h-5 flex items-center justify-center text-gray-500">
-                    <i class="ri-user-line"></i>
-                  </div>
-                  <span class="text-gray-600 text-sm ml-2">Created by: <span class="font-medium"><?php echo htmlspecialchars($ownerName); ?></span></span>
+
+            <div class="card bg-white rounded-lg shadow-sm overflow-hidden backdrop-blur-sm bg-white/90">
+                <div class="p-4 sm:p-6">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-4">
+                        <h3 class="text-xl font-semibold text-gray-800">
+                            <?php echo htmlspecialchars($groupName); ?>
+                        </h3>
+                        <span
+                            class="status-badge bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full shadow-sm shadow-green-100/50">
+                            <?php echo htmlspecialchars($status); ?>
+                        </span>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center text-gray-500">
+                                <i class="ri-user-line"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">Created by: <span class="font-medium">
+                                    <?php echo htmlspecialchars($ownerName); ?>
+                                </span></span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center text-gray-500">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">Created on: <span class="font-medium">
+                                    <?php echo htmlspecialchars($createdOn); ?>
+                                </span></span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center text-gray-500">
+                                <i class="ri-user-settings-line"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">My Role: <span
+                                    class="font-medium">Admin</span></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <button
+                            class="btn bg-primary text-white px-3 py-2 rounded-button flex items-center whitespace-nowrap shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30">
+                            <i class="ri-eye-line mr-1.5"></i> View Details
+                        </button>
+                        <div class="flex space-x-2">
+                            <a href="editgroup.php?id=<?= $group_id ?>"
+                                class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
+                                <i class="ri-edit-line"></i>
+                            </a>
+                            <button
+                                class="btn bg-red-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
+                                <i class="ri-delete-bin-line"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex items-center">
-                  <div class="w-5 h-5 flex items-center justify-center text-gray-500">
-                    <i class="ri-calendar-line"></i>
-                  </div>
-                  <span class="text-gray-600 text-sm ml-2">Created on: <span class="font-medium"><?php echo htmlspecialchars($createdOn); ?></span></span>
-                </div>
-                <div class="flex items-center">
-                  <div class="w-5 h-5 flex items-center justify-center text-gray-500">
-                    <i class="ri-user-settings-line"></i>
-                  </div>
-                  <span class="text-gray-600 text-sm ml-2">My Role: <span class="font-medium">Admin</span></span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                <button class="btn bg-primary text-white px-3 py-2 rounded-button flex items-center whitespace-nowrap shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30">
-                  <i class="ri-eye-line mr-1.5"></i> View Details
-                </button>
-                <div class="flex space-x-2">
-                    <a href="editgroup.php?id=<?= $group_id ?>" 
-                        class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
-                        <i class="ri-edit-line"></i>
-                    </a>
-                  <button class="btn bg-red-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
-                    <i class="ri-delete-bin-line"></i>
-                  </button>
-                </div>
-              </div>
             </div>
-          </div>
-          
-          <?php
+
+            <?php
             }
-          } else {
-            echo "<p>No groups found.</p>";
           }
           ?>
             <!-- Card 1 -->
-            
-            
-        <!-- Pagination -->
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8">
-            <p id="pagination-info" class="text-sm text-gray-600 order-2 sm:order-1">Showing <span
-                    class="font-medium">1-6</span> of <span class="font-medium">9</span> groups</p>
-            <div class="flex items-center space-x-2 order-1 sm:order-2">
-                <button id="prev-page"
-                    class="px-3 py-2 rounded-button bg-white border border-gray-300 text-gray-500 flex items-center justify-center hover:bg-gray-50 hover:border-gray-400 transition-all duration-300">
-                    <i class="ri-arrow-left-s-line"></i>
-                </button>
-                <button id="page-1"
-                    class="w-9 h-9 rounded-button bg-primary text-white flex items-center justify-center">1</button>
-                <button id="page-2"
-                    class="w-9 h-9 rounded-button bg-white border border-gray-300 text-gray-700 flex items-center justify-center">2</button>
-                <button id="page-3"
-                    class="w-9 h-9 rounded-button bg-white border border-gray-300 text-gray-700 flex items-center justify-center">3</button>
-                <button id="next-page"
-                    class="px-3 py-2 rounded-button bg-white border border-gray-300 text-gray-700 flex items-center justify-center">
-                    <i class="ri-arrow-right-s-line"></i>
-                </button>
-            </div>
         </div>
+
     </main>
+    <!-- Pagination -->
+    <div class="flex w-[80%] mx-auto mb-4 flex-col sm:flex-row items-center justify-between gap-4">
+        <p id="pagination-info" class="text-sm text-gray-600 order-2 sm:order-1">Showing <span
+                class="font-medium">1-6</span> of <span class="font-medium">9</span> groups</p>
+        <div class="flex items-center space-x-2 order-1 sm:order-2">
+            <button id="prev-page"
+                class="px-3 py-2 rounded-button bg-white border border-gray-300 text-gray-500 flex items-center justify-center hover:bg-gray-50 hover:border-gray-400 transition-all duration-300">
+                <i class="ri-arrow-left-s-line"></i>
+            </button>
+            <button id="page-1"
+                class="w-9 h-9 rounded-button bg-primary text-white flex items-center justify-center"></button>
+            <button id="next-page"
+                class="px-3 py-2 rounded-button bg-white border border-gray-300 text-gray-700 flex items-center justify-center">
+                <i class="ri-arrow-right-s-line"></i>
+            </button>
+        </div>
+    </div>
     <script>
-                document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.querySelector('input[placeholder="Search groups..."]');
-    const groupCards = document.querySelectorAll('.grid.grid-cols-1 > div');
-    const paginationContainer = document.querySelector('.flex.items-center.space-x-2');
+        document.addEventListener('DOMContentLoaded', function () {
+            // Configuration
+            const cardsPerPage = 9;
+            const cardContainer = document.querySelector('.card-container'); // Wrap your cards in this container
+            const paginationInfo = document.getElementById('pagination-info');
+            const prevButton = document.getElementById('prev-page');
+            const nextButton = document.getElementById('next-page');
+            const currentPageButton = document.getElementById('page-1'); // This will show current page number
+
+            // Get all card elements
+            const allCards = Array.from(document.querySelectorAll('.card'));
+            const totalCards = allCards.length;
+            const totalPages = Math.ceil(totalCards / cardsPerPage);
+
+            let currentPage = 1;
+
+            // Initialize pagination
+            function initPagination() {
+                // Hide all cards initially
+                allCards.forEach(card => card.style.display = 'none');
+
+                // Show cards for the first page
+                showPage(currentPage);
+
+                // Update pagination info
+                updatePaginationInfo();
+
+                // Set up event listeners
+                prevButton.addEventListener('click', goToPrevPage);
+                nextButton.addEventListener('click', goToNextPage);
+
+                // Disable prev button on first page
+                updateButtonStates();
+            }
+
+            // Show cards for a specific page
+            function showPage(page) {
+                const startIndex = (page - 1) * cardsPerPage;
+                const endIndex = Math.min(startIndex + cardsPerPage, totalCards);
+
+                // Hide all cards first
+                allCards.forEach(card => card.style.display = 'none');
+
+                // Show cards for the current page
+                for (let i = startIndex; i < endIndex; i++) {
+                    if (allCards[i]) {
+                        allCards[i].style.display = 'block';
+                    }
+                }
+
+                // Update current page number display
+                currentPageButton.textContent = page;
+            }
+
+            // Update pagination information text
+            function updatePaginationInfo() {
+                const start = ((currentPage - 1) * cardsPerPage) + 1;
+                const end = Math.min(currentPage * cardsPerPage, totalCards);
+                paginationInfo.innerHTML = `Showing <span class="font-medium">${start}-${end}</span> of <span class="font-medium">${totalCards}</span> groups`;
+            }
+
+            // Update button states (disable/enable)
+            function updateButtonStates() {
+                prevButton.disabled = currentPage === 1;
+                nextButton.disabled = currentPage === totalPages;
+
+                // Visual feedback for disabled state
+                if (prevButton.disabled) {
+                    prevButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    prevButton.classList.remove('hover:bg-gray-50', 'hover:border-gray-400');
+                } else {
+                    prevButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    prevButton.classList.add('hover:bg-gray-50', 'hover:border-gray-400');
+                }
+
+                if (nextButton.disabled) {
+                    nextButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    nextButton.classList.remove('hover:bg-gray-50', 'hover:border-gray-400');
+                } else {
+                    nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    nextButton.classList.add('hover:bg-gray-50', 'hover:border-gray-400');
+                }
+            }
+
+            // Navigation functions
+            function goToPage(pageNumber) {
+                if (pageNumber < 1 || pageNumber > totalPages || pageNumber === currentPage) return;
+
+                currentPage = pageNumber;
+                showPage(currentPage);
+                updatePaginationInfo();
+                updateButtonStates();
+            }
+
+            function goToPrevPage() {
+                if (currentPage > 1) {
+                    goToPage(currentPage - 1);
+                }
+            }
+
+            function goToNextPage() {
+                if (currentPage < totalPages) {
+                    goToPage(currentPage + 1);
+                }
+            }
+
+            // Initialize the pagination
+            initPagination();
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
+    const searchInput = document.querySelector('input[type="text"][placeholder="Search groups..."]');
+    const allCards = Array.from(document.querySelectorAll('.card'));
+    const noResultMessage = document.querySelector('.no-result');
+    const cardGrid = document.querySelector('.grid');
     const paginationInfo = document.getElementById('pagination-info');
-    const prevButton = document.getElementById('prev-page');
-    const nextButton = document.getElementById('next-page');
-    const cardsPerPage = 9;
-    let currentPage = 1;
-    let allCards = Array.from(groupCards); // Store all cards for filtering
-    let totalPages = Math.ceil(allCards.length / cardsPerPage);
-
-    // Function to filter cards based on search term
-    function filterCards(searchTerm) {
-        const lowerCaseSearchTerm = searchTerm.toLowerCase();
-        const filteredCards = allCards.filter(card => {
-            const titleElement = card.querySelector('h3');
-            const createdByElement = card.querySelector('.font-medium');
-            if (titleElement && titleElement.textContent.toLowerCase().includes(lowerCaseSearchTerm)) {
-                return true;
-            }
-            if (createdByElement && createdByElement.textContent.toLowerCase().includes(lowerCaseSearchTerm)) {
-                return true;
-            }
-            return false;
+    
+    // Store original state
+    const originalCards = [...allCards];
+    let currentCards = [...allCards];
+    
+    // Initialize search
+    function initSearch() {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.trim().toLowerCase();
+            filterCards(searchTerm);
         });
-        currentPage = 1; // Reset to the first page after filtering
-        totalPages = Math.ceil(filteredCards.length / cardsPerPage);
-        updatePagination(1, filteredCards); // Update pagination with filtered cards
     }
-
-    // Create Pagination Buttons Dynamically
-    function createPaginationButtons(filteredCards) {
-        // Clear existing buttons
-        const pageButtons = Array.from(paginationContainer.children).filter(
-            child => child.id && child.id.startsWith('page-')
-        );
-        pageButtons.forEach(button => button.remove());
-
-        const totalPagesForDisplay = Math.ceil(filteredCards.length / cardsPerPage);
-
-        // Define visible page range
-        const maxVisibleButtons = 5; // How many buttons to show
-        let startPage = Math.max(1, currentPage - 2);
-        let endPage = Math.min(totalPagesForDisplay, currentPage + 2);
-
-        if (currentPage <= 3) {
-            startPage = 1;
-            endPage = Math.min(maxVisibleButtons, totalPagesForDisplay);
-        } else if (currentPage > totalPagesForDisplay - 3) {
-            startPage = Math.max(totalPagesForDisplay - (maxVisibleButtons - 1), 1);
-            endPage = totalPagesForDisplay;
+    
+    // Filter cards based on search term
+    function filterCards(searchTerm = '') {
+        if (searchTerm === '') {
+            // Reset to original state
+            resetCards();
+            noResultMessage.style.display = 'none';
+            return;
         }
-
-        // Add first page and ellipsis if needed
-        if (startPage > 1) {
-            addPageButton(1, filteredCards);
-            if (startPage > 2) addEllipsis();
-        }
-
-        // Add the main range of page buttons
-        for (let i = startPage; i <= endPage; i++) {
-            addPageButton(i, filteredCards);
-        }
-
-        // Add ellipsis and last page if needed
-        if (endPage < totalPagesForDisplay) {
-            if (endPage < totalPagesForDisplay - 1) addEllipsis();
-            addPageButton(totalPagesForDisplay, filteredCards);
-        }
-
-        // Update button states
-        prevButton.disabled = currentPage === 1;
-        nextButton.disabled = currentPage === totalPagesForDisplay || totalPagesForDisplay === 0;
-    }
-
-    function addPageButton(pageNum, filteredCards) {
-        const button = document.createElement('button');
-        button.id = `page-${pageNum}`;
-        button.className = `w-9 h-9 rounded-button ${
-            pageNum === currentPage ? 'bg-primary text-white' : 'bg-white border border-gray-300 text-gray-700'
-        } flex items-center justify-center`;
-        button.textContent = pageNum;
-        button.addEventListener('click', () => updatePagination(pageNum, filteredCards));
-        paginationContainer.insertBefore(button, nextButton);
-    }
-
-    function addEllipsis() {
-        const ellipsis = document.createElement('span');
-        ellipsis.textContent = '...';
-        ellipsis.className = 'text-gray-500';
-        paginationContainer.insertBefore(ellipsis, nextButton);
-    }
-
-    // Update Pagination Display
-    function updatePagination(pageNum, currentCards = allCards) {
-        currentPage = pageNum;
-
-        createPaginationButtons(currentCards);
-
-        const totalCards = currentCards.length;
-        const startIndex = (pageNum - 1) * cardsPerPage;
-        const endIndex = Math.min(startIndex + cardsPerPage, totalCards);
-
-        groupCards.forEach(card => {
-            card.style.display = 'none'; // Hide all cards initially
+        
+        // Filter cards
+        const filteredCards = originalCards.filter(card => {
+            const cardText = card.textContent.toLowerCase();
+            return cardText.includes(searchTerm);
         });
-
-        currentCards.slice(startIndex, endIndex).forEach(card => {
+        
+        // Update display
+        updateCardDisplay(filteredCards);
+        
+        // Show/hide no results message
+        noResultMessage.style.display = filteredCards.length === 0 ? 'block' : 'none';
+        
+        // Update current cards reference
+        currentCards = filteredCards;
+        
+        // Update pagination info
+        updatePaginationInfo();
+        
+        // Reinitialize pagination if exists
+        if (typeof initPagination === 'function') {
+            initPagination();
+        }
+    }
+    
+    // Reset cards to original state
+    function resetCards() {
+        // Remove all cards first
+        allCards.forEach(card => card.remove());
+        
+        // Add back original cards in original order
+        originalCards.forEach(card => {
             card.style.display = 'block';
+            cardGrid.appendChild(card);
         });
-
-        paginationInfo.innerHTML = `Showing <span class="font-medium">${startIndex + 1}-${endIndex}</span> of <span class="font-medium">${totalCards}</span> groups`;
+        
+        currentCards = [...originalCards];
     }
-
-    // Arrow Button Handlers
-    prevButton.addEventListener('click', () => {
-        if (currentPage > 1) updatePagination(currentPage - 1);
-    });
-
-    nextButton.addEventListener('click', () => {
-        if (currentPage < totalPages) updatePagination(currentPage + 1);
-    });
-
-    // Search Input Event Listener
-    searchInput.addEventListener('input', function () {
-        const searchTerm = this.value.trim();
-        filterCards(searchTerm);
-    });
-
-    // Initialize Pagination
-    updatePagination(1);
+    
+    // Update card display
+    function updateCardDisplay(filteredCards) {
+        // Hide all cards first
+        allCards.forEach(card => card.style.display = 'none');
+        
+        // Show filtered cards
+        filteredCards.forEach(card => {
+            card.style.display = 'block';
+            cardGrid.appendChild(card);
+        });
+    }
+    
+    // Update pagination info
+    function updatePaginationInfo() {
+        if (!paginationInfo) return;
+        
+        const total = currentCards.length;
+        const showing = Math.min(total, 1); // Adjust based on your pagination logic
+        paginationInfo.innerHTML = `Showing <span class="font-medium">1-${showing}</span> of <span class="font-medium">${total}</span> groups`;
+    }
+    
+    // Initialize search functionality
+    initSearch();
+    
+    // Hide no result message initially if there are cards
+    if (allCards.length > 0) {
+        noResultMessage.style.display = 'none';
+    } else {
+        noResultMessage.style.display = 'block';
+    }
 });
     </script>
 </body>
