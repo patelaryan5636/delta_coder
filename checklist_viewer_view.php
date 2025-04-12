@@ -20,7 +20,7 @@ $check_role->execute();
 $role_result = $check_role->get_result();
 $user_role = $role_result->fetch_assoc()['role'] ?? null;
 
-if ($user_role !== 'viewer') {
+if ($user_role !== 'Viewer') {
     die("Access denied. Only viewers can access this page.");
 }
 ?>
@@ -86,7 +86,7 @@ if ($user_role !== 'viewer') {
         </tr>
         <?php
         $query = "
-            SELECT ci.item_name, ci.status, ci.note, um.username, cc.cc_name 
+            SELECT ci.item_name, ci.status, ci.note, um.user_name, cc.category_name 
             FROM checklist_items ci 
             JOIN checklist_categories cc ON ci.category_id = cc.cc_id 
             LEFT JOIN user_master um ON ci.assigned_to = um.user_id 
@@ -100,8 +100,8 @@ if ($user_role !== 'viewer') {
         while ($row = $results->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . htmlspecialchars($row['item_name']) . "</td>";
-            echo "<td>" . htmlspecialchars($row['cc_name']) . "</td>";
-            echo "<td>" . ($row['username'] ?? 'Unassigned') . "</td>";
+            echo "<td>" . htmlspecialchars($row['category_name']) . "</td>";
+            echo "<td>" . ($row['user_name'] ?? 'Unassigned') . "</td>";
             echo "<td class='status'>" . $row['status'] . "</td>";
             echo "<td><div class='note-box'>" . nl2br(htmlspecialchars($row['note'])) . "</div></td>";
             echo "</tr>";
