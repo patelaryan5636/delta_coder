@@ -53,21 +53,20 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     <header class="w-full py-4 px-6 flex items-center justify-between border-b border-gray-100 bg-white">
         <div class="flex items-center">
             <h1 class="text-2xl font-['Pacifico'] text-primary">PackPal</h1>
-            <nav class="hidden md:flex ml-12">
-                <a href="#" class="text-gray-800 hover:text-primary mx-4 font-medium">Features</a>
-                <a href="#" class="text-gray-800 hover:text-primary mx-4 font-medium">Pricing</a>
-                <a href="#" class="text-gray-800 hover:text-primary mx-4 font-medium">Resources</a>
-                <a href="https://readdy.ai/home/3ec255fd-be5c-4e1b-9144-c8f0df4c5501/2a9bf4ba-b082-4052-a1a0-3243d5615ae1"
-                    data-readdy="true" class="text-gray-800 hover:text-primary mx-4 font-medium">About</a>
-            </nav>
         </div>
         <div class="flex items-center">
+<<<<<<< Updated upstream:index.php
             <a href="sign-"
+=======
+            <a href="#"
+                class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">DashBorad</a>
+                <a href="#"
+>>>>>>> Stashed changes:index.html
                 class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Sign
                 In</a>
-            <button
+            <a href="#"
                 class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all">Sign
-                Up</button>
+                Up</a>
         </div>
     </header>
     <section>
@@ -137,11 +136,10 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                 </div>
                 <div class="bg-white p-8 rounded shadow-sm hover:shadow-md transition-all">
                     <div class="w-14 h-14 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
-                        <i class="ri-template-line text-primary ri-xl"></i>
+                        🪜 
                     </div>
-                    <h3 class="text-xl font-semibold mb-3">Ready-to-Use Templates</h3>
-                    <p class="text-gray-600">Start with pre-made templates for different types of trips and events, then
-                        customize as needed.</p>
+                    <h3 class="text-xl font-semibold mb-3">Actionable Steps</h3>
+                    <p class="text-gray-600">Break down large tasks into smaller, manageable steps to stay on schedule.</p>
                 </div>
                 <div class="bg-white p-8 rounded shadow-sm hover:shadow-md transition-all">
                     <div class="w-14 h-14 flex items-center justify-center bg-primary bg-opacity-10 rounded-full mb-6">
