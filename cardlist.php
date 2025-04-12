@@ -156,12 +156,13 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
         </div>
         <!-- Group Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
-            
+
         <?php
         $result = $conn->query("SELECT * FROM group_master where created_by = '$user_id'");
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
+                $group_id = $row['group_id'];
               $groupName = $row['group_name'];
               $ownerId = $row['created_by'];
               $createdOn = date("F j, Y", strtotime($row['created_at']));
@@ -209,9 +210,10 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                   <i class="ri-eye-line mr-1.5"></i> View Details
                 </button>
                 <div class="flex space-x-2">
-                  <button class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
-                    <i class="ri-edit-line"></i>
-                  </button>
+                    <a href="editgroup.php?id=<?= $group_id ?>" 
+                        class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
+                        <i class="ri-edit-line"></i>
+                    </a>
                   <button class="btn bg-red-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
                     <i class="ri-delete-bin-line"></i>
                   </button>

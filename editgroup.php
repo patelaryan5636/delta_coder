@@ -1,5 +1,8 @@
 <?php 
-$group_id = $_GET['group_id']; // Assuming passed in URL
+
+require 'includes/scripts/connection.php';  
+
+$group_id = $_GET['id']; // Assuming passed in URL
 
 // Fetch group info
 $groupQuery = $conn->query("SELECT * FROM group_master WHERE group_id = '$group_id'");
@@ -7,7 +10,7 @@ $group = $groupQuery->fetch_assoc();
 
 // Fetch group members
 $membersQuery = $conn->query("SELECT gm.user_id, gm.role, um.user_name 
-                              FROM group_members gm 
+                              FROM user_group_roles gm 
                               JOIN user_master um ON gm.user_id = um.user_id 
                               WHERE gm.group_id = '$group_id'");
 
