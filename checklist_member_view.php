@@ -7,23 +7,26 @@ if (!isset($_SESSION['pacpal_logedin_user_id'])) {
 }
 
 $user_id = $_SESSION['pacpal_logedin_user_id'];
-$group_id = $_GET['group_id'] ?? null;
+$group_id = isset($_GET['group_id']) ? intval($_GET['group_id']) : null;
 
 if (!$group_id) {
     die("Group ID is missing.");
 }
 
-// Check user role in the group
-$role_sql = "SELECT role FROM user_group_roles WHERE group_id = ? AND user_id = ?";
-$role_stmt = $conn->prepare($role_sql);
-$role_stmt->bind_param("ii", $group_id, $user_id);
-$role_stmt->execute();
-$role_result = $role_stmt->get_result();
-$role = $role_result->fetch_assoc();
+// Get role directly (no prepared statements)
+$role_sql = "SELECT role FROM user_group_roles WHERE group_id = $group_id AND user_id = $user_id";
+$role_result = mysqli_query($conn, $role_sql);
 
-if (!$role || in_array(strtolower($role['role']), ['owner', 'admin'])) {
-    die("Access denied: Only group members can view this page.");
+if (!$role_result || mysqli_num_rows($role_result) == 0) {
+    die("Access denied: You are not part of this group.");
 }
+
+$role = mysqli_fetch_assoc($role_result);
+
+// Optional: If you want only members (not admin/owner) to view, uncomment this:
+// if (in_array(strtolower($role['role']), ['owner', 'admin'])) {
+//     die("Access denied: Only members can view this page.");
+// }
 
 ?>
 <!DOCTYPE html>
@@ -84,20 +87,17 @@ if (!$role || in_array(strtolower($role['role']), ['owner', 'admin'])) {
     <h2>My Assigned Tasks</h2>
 
     <?php
-    // Fetch tasks assigned to this user for this group
-    $sql = "
+    // Fetch tasks using plain query
+    $task_sql = "
         SELECT ci.id, ci.item_name, ci.status, ci.note, cc.category_name
         FROM checklist_items ci
         JOIN checklist_categories cc ON ci.category_id = cc.cc_id
-        WHERE ci.assigned_to = ? AND cc.group_id = ?
+        WHERE ci.assigned_to = $user_id AND cc.group_id = $group_id
     ";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $user_id, $group_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $task_result = mysqli_query($conn, $task_sql);
 
-    if ($result->num_rows > 0) {
-        while ($task = $result->fetch_assoc()) {
+    if ($task_result && mysqli_num_rows($task_result) > 0) {
+        while ($task = mysqli_fetch_assoc($task_result)) {
             ?>
             <form method="post" action="update_task_status.php">
                 <div class="task-card">
