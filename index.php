@@ -1,3 +1,19 @@
+<?php
+  require 'includes/scripts/connection.php';  
+  // include 'includes/scripts/config.php';
+  session_start();
+  if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedin_user_id']) !== '')){
+      $user_id = $_SESSION['pacpal_logedin_user_id'];
+      $query = "SELECT * FROM user_master WHERE user_id = $user_id";
+      $result = mysqli_query($conn, $query);
+      $userdata = mysqli_fetch_assoc($result);
+      $user_role = $userdata["user_role"];
+      $full_name = $userdata['full_name'];
+  }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,12 +73,25 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             <h1 class="text-2xl font-['Pacifico'] text-primary">PackPal</h1>
         </div>
         <div class="flex items-center">
-            <a href="cardlist" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">DashBorad</a>
-                <a href="sign-in.php" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Sign
+            <?php 
+                if(isset($_SESSION['pacpal_logedin_user_id'])) {
+                    ?>
+
+                    <a href="cardlist" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">DashBorad</a>
+                    <a href="logout" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Logout</a>
+                    <?php
+                }else{
+                    ?>
+            <a href="sign-in.php" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Sign
                 In</a>
             <a href="sign-up"
                 class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all">Sign
                 Up</a>
+                    <?php
+                    
+                }
+            ?>
+                
         </div>
     </header>
     <section>
@@ -79,7 +108,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                         teams, and travel groups.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="sign-up.php"
+                        <a href="cardlist"
                             data-readdy="true">
                             <button
                                 class="bg-primary text-white px-6 py-3 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all flex items-center justify-center">

@@ -1,3 +1,19 @@
+<?php
+session_start();
+require_once 'includes/scripts/connection.php';
+if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedin_user_id']) !== '')){
+  $user_id = $_SESSION['pacpal_logedin_user_id'];
+  $query = "SELECT * FROM user_master WHERE user_id = $user_id";
+  $result = mysqli_query($conn, $query);
+  $userdata = mysqli_fetch_assoc($result);
+  $user_role = $userdata["user_role"];
+  if($user_role != 3){
+      header("Location: 404.php");
+  }
+} else {
+  header("Location: sign-in.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
