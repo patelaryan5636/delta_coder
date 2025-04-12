@@ -97,9 +97,9 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <a href="/" class="flex items-center">
-                        <span class="text-packpal-navy font-bold text-2xl">
+                        <a href="index" class="text-packpal-navy font-bold text-2xl">
                             <span class="text-packpal-teal">Pack</span>Pal
-                        </span>
+                        </a>
                     </a>
                 </div>
 
@@ -191,16 +191,6 @@
                     sizes.
                     No more forgotten items, mismatched plans, or coordination headaches.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in animation-delay-500">
-                    <button
-                        class="bg-packpal-teal hover:bg-packpal-dark-teal text-white px-4 py-2 rounded-md transition-colors">
-                        Explore Features
-                    </button>
-                    <button
-                        class="border border-packpal-teal text-packpal-teal hover:bg-packpal-teal hover:text-white px-4 py-2 rounded-md transition-colors">
-                        Our Story
-                    </button>
-                </div>
             </div>
         </div>
     </section>
@@ -313,65 +303,43 @@
                 <div class="text-center">
                     <div
                         class="aspect-square rounded-full overflow-hidden mb-4 mx-auto max-w-[200px] border-4 border-packpal-teal/20">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=256&h=256&auto=format&fit=crop"
+                        <img src="./assets/img/PYS.jpg"
                             alt="Sarah Johnson" class="w-full h-full object-cover" />
                     </div>
-                    <h3 class="text-xl font-semibold text-packpal-navy">Sarah Johnson</h3>
-                    <p class="text-packpal-teal mb-2">Co-Founder & CEO</p>
-                    <p class="text-gray-600 text-sm">
-                        Former travel planner with a passion for organization and efficiency.
-                    </p>
+                    <h3 class="text-xl font-semibold text-packpal-navy">Priyanshu Pithadiya</h3>
+                    <p class="text-packpal-teal mb-2">Frontend Developer</p>
                 </div>
 
                 <div class="text-center">
                     <div
                         class="aspect-square rounded-full overflow-hidden mb-4 mx-auto max-w-[200px] border-4 border-packpal-teal/20">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=256&h=256&auto=format&fit=crop"
+                        <img src="./assets/img/Rangu.jpg"
                             alt="Michael Chen" class="w-full h-full object-cover" />
                     </div>
-                    <h3 class="text-xl font-semibold text-packpal-navy">Michael Chen</h3>
-                    <p class="text-packpal-teal mb-2">Co-Founder & CTO</p>
-                    <p class="text-gray-600 text-sm">
-                        Tech innovator with a background in mobile app development.
-                    </p>
+                    <h3 class="text-xl font-semibold text-packpal-navy">Rangat Prajapati</h3>
+                    <p class="text-packpal-teal mb-2">Backend Developer</p>
                 </div>
 
                 <div class="text-center">
                     <div
                         class="aspect-square rounded-full overflow-hidden mb-4 mx-auto max-w-[200px] border-4 border-packpal-teal/20">
-                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=256&h=256&auto=format&fit=crop"
+                        <img src="./assets/img/Aryan.jpg"
                             alt="Olivia Martinez" class="w-full h-full object-cover" />
                     </div>
-                    <h3 class="text-xl font-semibold text-packpal-navy">Olivia Martinez</h3>
-                    <p class="text-packpal-teal mb-2">Head of Design</p>
-                    <p class="text-gray-600 text-sm">
-                        UX specialist focused on creating intuitive user experiences.
-                    </p>
+                    <h3 class="text-xl font-semibold text-packpal-navy">Aryan Patel</h3>
+                    <p class="text-packpal-teal mb-2">Backend Developer</p>
                 </div>
 
                 <div class="text-center">
                     <div
                         class="aspect-square rounded-full overflow-hidden mb-4 mx-auto max-w-[200px] border-4 border-packpal-teal/20">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=256&h=256&auto=format&fit=crop"
+                        <img src="./assets/img/PVN.jpg"
                             alt="James Wilson" class="w-full h-full object-cover" />
                     </div>
-                    <h3 class="text-xl font-semibold text-packpal-navy">James Wilson</h3>
-                    <p class="text-packpal-teal mb-2">Head of Customer Success</p>
-                    <p class="text-gray-600 text-sm">
-                        Dedicated to ensuring every user has a seamless experience.
-                    </p>
+                    <h3 class="text-xl font-semibold text-packpal-navy">Pavan Prajapati</h3>
+                    <p class="text-packpal-teal mb-2">ML Developer</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Simplified CTA Section -->
-    <section class="bg-packpal-teal text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl font-bold mb-4">Ready to Simplify Your Group Logistics?</h2>
-            <button class="bg-white text-packpal-teal hover:bg-gray-100 px-4 py-2 rounded-md transition-colors">
-                Get Started Now
-            </button>
         </div>
     </section>
 
