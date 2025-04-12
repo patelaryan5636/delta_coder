@@ -55,10 +55,10 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             <h1 class="text-2xl font-['Pacifico'] text-primary">PackPal</h1>
         </div>
         <div class="flex items-center">
-            <a href="" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">DashBorad</a>
-                <a href="#" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Sign
+            <a href="cardlist.html" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">DashBorad</a>
+                <a href="sign-in.php" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Sign
                 In</a>
-            <a href="#"
+            <a href="sign-up.php"
                 class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all">Sign
                 Up</a>
         </div>
@@ -77,7 +77,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                         teams, and travel groups.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="https://readdy.ai/home/3ec255fd-be5c-4e1b-9144-c8f0df4c5501/f3013ef2-7db4-4779-9742-64ebada73c4b"
+                        <a href="sign-up.php"
                             data-readdy="true">
                             <button
                                 class="bg-primary text-white px-6 py-3 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all flex items-center justify-center">
@@ -85,10 +85,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                                 <i class="ri-arrow-right-line ml-2"></i>
                             </button>
                         </a>
-                        <button
-                            class="border-2 border-gray-300 text-gray-700 px-6 py-3 !rounded-button whitespace-nowrap font-medium hover:border-primary hover:text-primary transition-all flex items-center justify-center">
-                            Explore Features
-                        </button>
+
                     </div>
                 </div>
             </div>
@@ -305,16 +302,11 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of organized travelers and event planners who trust
                 PackPal.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button
+                <a href="sign-up.php"
                     class="bg-white border-2 border-white text-primary px-8 py-3 !rounded-button whitespace-nowrap font-medium hover:border-white hover:bg-primary hover:border-2 hover:text-white transition-all flex items-center justify-center">
                     Get Started for Free
                     <i class="ri-arrow-right-line ml-2"></i>
-                </button>
-                <button
-                    class="border-2 border-white text-white px-8 py-3 !rounded-button whitespace-nowrap font-medium hover:bg-white hover:text-primary transition-all flex items-center justify-center">
-                    Watch Demo
-                    <i class="ri-play-circle-line ml-2"></i>
-                </button>
+                </a>
             </div>
         </div>
     </section>
