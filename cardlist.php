@@ -27,6 +27,8 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         @import url('https://fonts.cdnfonts.com/css/agbalumo');
@@ -136,7 +138,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                         class="bg-white border border-gray-300 text-gray-900 text-sm rounded-button pl-10 pr-4 py-2.5 w-full sm:min-w-[16rem]"
                         placeholder="Search groups...">
                 </div>
-                <a href="tripform"
+                <a href="form"
                     class="bg-primary text-white px-4 py-2.5 rounded-button flex items-center justify-center whitespace-nowrap shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300">
                     <i class="ri-add-line mr-2"></i>
                     Add New Group
@@ -213,21 +215,21 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                     </div>
                     <div class="flex items-center justify-between pt-4 border-t border-gray-100">
                         <a href="assign_checklist.php?group_id=<?= $group_id ?>"
-                            class="btn bg-primary text-white px-3 py-2 rounded-button flex items-center whitespace-nowrap shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30">
-                            <i class="ri-eye-line mr-1.5"></i> View Details
+                            class="btn bg-primary text-white px-2 py-2 rounded-button flex items-center whitespace-nowrap shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30">
+                            <i class="fa-solid fa-list-check"></i>&nbsp;Create Checklist
                         </a>
                         <div class="flex space-x-2">
+                            <a href="add_category.php?group_id=<?= $group_id ?>"
+                                class="btn bg-orange-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
+                                <i class="fa-solid fa-plus"></i>
+                            </a>
                             <a href="editgroup.php?id=<?= $group_id ?>"
                                 class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
                                 <i class="ri-edit-line"></i>
                             </a>
                             <a href="checklist_view.php?group_id=<?= $group_id ?>"
                                 class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
-                                <i class="ri-edit-line"></i>
-                            </a>
-                            <a href="add_category.php?group_id=<?= $group_id ?>"
-                                class="btn bg-red-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
-                                <i class="ri-delete-bin-line"></i>
+                                <i class="fa-solid fa-eye"></i>
                             </a>
                             <button
                                 class="btn bg-red-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">

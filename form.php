@@ -37,7 +37,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #0a657a;
+  background-color:rgb(50, 106, 118);
   border-radius: 10px;
   border: 2px solid #f2f2f2;
 }
@@ -45,7 +45,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #0a657a #f2f2f2;
+  scrollbar-color:rgb(65, 110, 120) #f2f2f2;
 }
 
   body {
@@ -116,7 +116,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
     }
 
     button, input[type="submit"] {
-      background: linear-gradient(135deg, #0a657a 0%, #076a7b 100%);
+      background: linear-gradient(135deg,rgb(90, 109, 113) 0%,rgb(113, 130, 133) 100%);
       color: #fff;
       border: none;
       padding: 12px 0px;
