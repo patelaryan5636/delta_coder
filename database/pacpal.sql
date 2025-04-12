@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2025 at 09:02 PM
+-- Generation Time: Apr 12, 2025 at 03:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -11,9 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-DROP DATABASE IF EXISTS `pacpal`;
-CREATE DATABASE `pacpal`;
-USE `pacpal`;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -78,9 +76,17 @@ INSERT INTO `credential` (`key`, `value`) VALUES
 CREATE TABLE `group_master` (
   `group_id` int(11) NOT NULL,
   `group_name` varchar(100) NOT NULL,
+  `group_description` text NOT NULL,
   `created_by` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `group_master`
+--
+
+INSERT INTO `group_master` (`group_id`, `group_name`, `group_description`, `created_by`, `created_at`) VALUES
+(4, 'aryan', 'asds', NULL, '2025-04-12 12:11:18');
 
 -- --------------------------------------------------------
 
@@ -105,8 +111,15 @@ CREATE TABLE `user_group_roles` (
   `ugr_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL,
-  `role` enum('Owner','Admin','Member','Viewer') DEFAULT 'Member'
+  `role` enum('Owner','Admin','Member','Viewer') DEFAULT 'Viewer'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_group_roles`
+--
+
+INSERT INTO `user_group_roles` (`ugr_id`, `user_id`, `group_id`, `role`) VALUES
+(4, 1, 4, 'Admin');
 
 -- --------------------------------------------------------
 
@@ -125,6 +138,14 @@ CREATE TABLE `user_master` (
   `phone` bigint(12) NOT NULL,
   `is_verified` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_master`
+--
+
+INSERT INTO `user_master` (`user_id`, `user_name`, `email`, `password`, `user_role`, `joined_date`, `full_name`, `phone`, `is_verified`) VALUES
+(1, '21504087', 'sachaniaryan675@gmail.com', '$2y$10$gd6ttO7ZFsi/fG5Jq8eOQuzZrqgnlnxHHd2drg1p26h0.y0svsWVK', 3, 1744438523, '0', 6353054338, 1),
+(3, 'aryan5636', 'patelaryan5636@gmail.com', '$2y$10$HP/imcCgff24JjvX92Hyi.cSZs3XY8xh0bb8KLAkug4gV2brcjeeq', 3, 1744461200, '0', 9537001611, 1);
 
 --
 -- Indexes for dumped tables
@@ -188,19 +209,19 @@ ALTER TABLE `checklist_items`
 -- AUTO_INCREMENT for table `group_master`
 --
 ALTER TABLE `group_master`
-  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_group_roles`
 --
 ALTER TABLE `user_group_roles`
-  MODIFY `ugr_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ugr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_master`
 --
 ALTER TABLE `user_master`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
