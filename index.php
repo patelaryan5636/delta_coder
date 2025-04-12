@@ -61,6 +61,9 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             <a href="#"
                 class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">DashBorad</a>
                 <a href="#"
+<<<<<<< Updated upstream:index.php
+>>>>>>> Stashed changes:index.html
+=======
 >>>>>>> Stashed changes:index.html
                 class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Sign
                 In</a>
