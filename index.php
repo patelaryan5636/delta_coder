@@ -62,7 +62,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             </nav>
         </div>
         <div class="flex items-center">
-            <a href="#"
+            <a href="sign-"
                 class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Sign
                 In</a>
             <button

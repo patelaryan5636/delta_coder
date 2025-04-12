@@ -93,7 +93,11 @@ function sendWelcomeEmail($email, $username,$pass) {
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8'; // Important for emoji support
     $mail->Subject = "🎉 Welcome to PackPal, {$username}!";
+ 
 
+
+
+    
     $mail->Body = "
         <div style='font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 10px; color: #333;'>
             <h2 style='color: #2c7865;'>Welcome to PackPal, {$username}! 🎒</h2>
