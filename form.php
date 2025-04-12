@@ -17,7 +17,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
 
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
   <title>Create Group</title>
   <style>
     .member-row { margin-bottom: 10px; }
@@ -26,6 +26,28 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
 </head>
 <style>
   @import url('https://fonts.cdnfonts.com/css/agbalumo');
+  /* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f2f2f2;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0a657a;
+  border-radius: 10px;
+  border: 2px solid #f2f2f2;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #0a657a #f2f2f2;
+}
+
   body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -36,96 +58,129 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100vw;
-  }
-
-  h2, h3 {
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
+    width: 99vw;
   }
 
   form {
-    background: #fff;
-    color: #333;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-  }
+      backdrop-filter: blur(2px);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 55%;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
 
-  form h2 {
-    color: #6a11cb;
-  }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  input, textarea, select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
+    h3 {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      color: #444;
+      animation: fadeIn 1.2s ease;
+    }
 
-  button {
-    background: #6a11cb;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-  button:hover {
-    background: #2575fc;
-  }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 0;
+      margin: 12px 0;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
 
-  .member-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
+    select{
+      padding: 10px 5px;
+    }
 
-  .member-row select, .member-row button {
-    flex: 1;
-  }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #6a11cb33;
+    }
 
-  @media (max-width: 768px) {
-    form {
-      padding: 20px;
+    button, input[type="submit"] {
+      background: linear-gradient(135deg, #0a657a 0%, #076a7b 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 0px;
+      /* margin-top: 15px; */
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover, input[type="submit"]:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 15px rgba(17, 129, 203, 0.4);
     }
 
     .member-row {
-      flex-direction: column;
-      align-items: stretch;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      animation: fadeIn 0.5s ease;
     }
 
-    button {
-      width: 100%;
+    .member-row select, .member-row button {
+      flex: 1;
     }
-  }
+
+    .member-row button {
+      background-color: #ff4d4d;
+      background-image: linear-gradient(45deg, #ff4d4d, #ff6a6a);
+    }
+
+    @media (max-width: 768px) {
+      .member-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      button, input[type="submit"] {
+        width: 100%;
+      }
+    }
 </style>
 <body>
-  <form action="insert_group.php" method="POST" id="groupForm" style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; border: 1px solid #ccc; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-    <h2 style="text-align: center; color: #333; font-family: 'Agbalumo', sans-serif !important; font-size: 2vw;">Create New Group</h2>
+  <form action="insert_group.php" method="POST" id="groupForm" style="max-width: 55%; margin: auto; font-family: Arial, sans-serif; border: 1px solid #ccc; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2 style="text-align: center; color: #333; font-family: 'Agbalumo', sans-serif !important; font-size: 3vw;">Create New Group</h2>
     
     <div style="margin-bottom: 15px;">
       <label for="group_name" style="display: block; font-weight: bold; margin-bottom: 5px;">Group Name:</label>
-      <input type="text" id="group_name" name="group_name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
+      <input type="text" id="group_name" name="group_name" style="width: 100%; border: 1px solid #ccc; border-radius: 4px;" required>
     </div>
 
     <div style="margin-bottom: 15px;">
       <label for="group_description" style="display: block; font-weight: bold; margin-bottom: 5px;">Group Description:</label>
-      <textarea id="group_description" name="group_description" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" rows="4" required></textarea>
+      <textarea id="group_description" name="group_description" style="width: 100%; border: 1px solid #ccc; border-radius: 4px;" rows="4" required></textarea>
     </div>
 
     <h3 style="color: #333; margin-bottom: 10px;">Group Members:</h3>
     <div id="membersWrapper" style="margin-bottom: 15px;"></div>
-    <button type="button" onclick="addMember()" style="background-color: #007BFF; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">+ Add Member</button>
+    <button type="button" onclick="addMember()" style="background-color: #007BFF; color: white; border: none; padding: 10px 15px; border-radius: 14px; cursor: pointer;">+ Add Member</button>
     
     <div style="text-align: center; margin-top: 20px;">
-      <input type="submit" value="Create Group" style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+      <input type="submit" value="Create Group" style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 14px; cursor: pointer;">
     </div>
   </form>
 
@@ -143,7 +198,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
         </select>
 
         <select name="members[${count}][role]" required>
-          <option value="">Select Role</option>
+          <option value="" selected disabled>Select Role</option>
           <option value="admin">Admin</option>
           <option value="member">Member</option>
           <option value="viewer">Viewer</option>
@@ -158,7 +213,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
         .then(res => res.json())
         .then(data => {
           const dropdown = memberDiv.querySelector('.user-dropdown');
-          dropdown.innerHTML = '<option value="">Select User</option>';
+          dropdown.innerHTML = '<option value="" selected disabled>Select User</option>';
           data.forEach(user => {
             const option = document.createElement('option');
             option.value = user.user_id;
