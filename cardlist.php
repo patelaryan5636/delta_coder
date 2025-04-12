@@ -126,7 +126,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                 <a href="tripform"
                     class="bg-primary text-white px-4 py-2.5 rounded-button flex items-center justify-center whitespace-nowrap shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300">
                     <i class="ri-add-line mr-2"></i>
-                
+                    Add New Group
                 </a>
             </div>
         </div>
