@@ -95,18 +95,30 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
     }
 
     input, textarea, select {
-      width: 100%;
-      padding: 12px 0;
+      width: 96% !important;
+      padding: 12px 12px;
       margin: 12px 0;
       border: none;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.23);
       font-size: 16px;
       box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
     }
 
+    .datetime{
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    input[type="date"], input[type="time"] {
+      width: 100%;
+      padding: 10px 0px;
+    }
+
     select{
+      width: 100%;
       padding: 10px 5px;
     }
 
@@ -116,7 +128,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
     }
 
     button, input[type="submit"] {
-      background: linear-gradient(135deg,rgb(90, 109, 113) 0%,rgb(113, 130, 133) 100%);
+      background: #96b4b4;
       color: #fff;
       border: none;
       padding: 12px 0px;
@@ -169,6 +181,17 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
       <label for="group_name" style="display: block; font-weight: bold; margin-bottom: 5px;">Group Name:</label>
       <input type="text" id="group_name" name="group_name" style="width: 100%; border: 1px solid #ccc; border-radius: 4px;" required>
     </div>
+    <div class="datetime">
+      <div style="margin-bottom: 15px; width: 50%;">
+        <label for="group_name" style="display: block; font-weight: bold; margin-bottom: 5px;">Due Date</label>
+        <input type="date" id="group_name" name="group_name" style="width: 100%; border: 1px solid #ccc; border-radius: 4px;" required>
+      </div>
+      
+      <div style="margin-bottom: 15px; width: 50%;">
+        <label for="group_name" style="display: block; font-weight: bold; margin-bottom: 5px;">Due Time</label>
+        <input type="Time" id="group_name" name="group_name" style="width: 100%; border: 1px solid #ccc; border-radius: 4px;" required>
+      </div>
+    </div>
 
     <div style="margin-bottom: 15px;">
       <label for="group_description" style="display: block; font-weight: bold; margin-bottom: 5px;">Group Description:</label>
@@ -177,10 +200,10 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
 
     <h3 style="color: #333; margin-bottom: 10px;">Group Members:</h3>
     <div id="membersWrapper" style="margin-bottom: 15px;"></div>
-    <button type="button" onclick="addMember()" style="background-color: #007BFF; color: white; border: none; padding: 10px 15px; border-radius: 14px; cursor: pointer;">+ Add Member</button>
+    <button type="button" onclick="addMember()" style=" border: none; padding: 10px 15px; border-radius: 14px; cursor: pointer;">+ Add Member</button>
     
     <div style="text-align: center; margin-top: 20px;">
-      <input type="submit" value="Create Group" style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 14px; cursor: pointer;">
+      <input type="submit" value="Create Group" style=" border: none; padding: 10px 20px; border-radius: 14px; cursor: pointer;">
     </div>
   </form>
 
