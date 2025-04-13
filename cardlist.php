@@ -1,4 +1,4 @@
-<?php
+ sdfjbd <?php
 session_start();
 require_once 'includes/scripts/connection.php';
 if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedin_user_id']) !== '')){
