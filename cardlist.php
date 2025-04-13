@@ -183,9 +183,9 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                         <h3 class="text-xl font-semibold text-gray-800">
                             <?php echo htmlspecialchars($groupName); ?>
                         </h3>
-                        <span
-                            class="status-badge bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full shadow-sm shadow-green-100/50">
-                            <?php echo htmlspecialchars($status); ?>
+                        <a href="generate_task_report.php?group_id=<?= $group_id ?>"
+                            class="status-badge text-xs px-2.5 py-1 rounded-full shadow-sm shadow-green-100/50">
+                            <img src="./assets/img/pdf.svg" alt="pdf" style="height: 24px;">
                         </span>
                     </div>
                     <div class="space-y-3 mb-6">
