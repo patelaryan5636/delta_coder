@@ -353,14 +353,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     </section>
     <footer class="bg-gray-50 pt-6 pb-8">
         <div class="container mx-auto px-6">
-            <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 PackPal. All rights reserved.</p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#" class="text-gray-500 text-sm hover:text-primary">Terms of Service</a>
-                    <a href="#" class="text-gray-500 text-sm hover:text-primary">Privacy Policy</a>
-                    <a href="#" class="text-gray-500 text-sm hover:text-primary">Cookie Policy</a>
-                    <a href="#" class="text-gray-500 text-sm hover:text-primary">Accessibility</a>
-                </div>
+            <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-center items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0 ">© 2025 PackPal. All rights reserved.</p>
             </div>
         </div>
     </footer>
