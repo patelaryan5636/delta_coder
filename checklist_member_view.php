@@ -341,7 +341,7 @@ $role = mysqli_fetch_assoc($role_result);
             while ($task = mysqli_fetch_assoc($task_result)) {
                 $status_class = 'status-' . str_replace(' ', '-', $task['status']);
                 ?>
-                <form method="post" action="update_task_status.php" class="task-card">
+                <form method="post" action="update_task_status.php?id=<?= $group_id ?>" class="task-card">
                     <div class="task-header">
                         <div>
                             <div class="task-title"><?= htmlspecialchars($task['item_name']) ?></div>
