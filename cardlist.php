@@ -223,7 +223,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                         </h3>
                         <a href="generate_task_report.php?group_id=<?= $group_id ?>"
                             class="status-badge text-xs px-2.5 py-1 rounded-full shadow-sm shadow-green-100/50">
-                            <img src="./assets/img/pdf.svg" alt="pdf" style="height: 24px;">
+                            <img src="./assets/img/pdf.svg" alt="pdf" style="height: 24px;"></a>
                         </span>
                     </div>
                     <div class="space-y-3 mb-6">

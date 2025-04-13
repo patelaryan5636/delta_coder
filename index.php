@@ -118,9 +118,33 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 </head>
 
 <body class="bg-primary bg-opacity-5 min-h-screen">
-<?php
-            include("navbar.php");
-    ?>
+    <nav class="nav-container mt-2">
+    <div class="nav-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 flex justify-between items-center">
+        <a href="index" class="logo">PackPal</a>
+        <div class="flex items-center space-x-4">
+            <?php 
+                if(isset($_SESSION['pacpal_logedin_user_id'])) {
+            ?>
+                <a href="cardlist" class="nav-button bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap">
+                Dashboard
+            </a>
+            <div class="profile-container">
+                <a href="profile"
+                    class="nav-button bg-gray-100 hover:bg-gray-200 p-2 !rounded-full w-10 h-10 flex items-center justify-center">
+                    <i class="ri-user-line ri-lg"></i>
+                </a>
+            </div>
+            <?php
+                }else{
+            ?>
+                <a href="sign-in.php" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all mr-6">Sign In</a>
+                <a href="sign-up" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all">Sign Up</a>
+            <?php        
+                }
+            ?>
+        </div>
+    </div>
+</nav>
     <section>
         <div class="container mx-auto px-8 md:py-10 relative z-10">
             <div class="flex w-full justify-center items-center flex-col text-center">
@@ -135,7 +159,26 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                         teams, and travel groups.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="cardlist"
+                        
+
+
+
+                        <?php 
+                if(isset($_SESSION['pacpal_logedin_user_id'])) {
+            ?>
+                <a href="cardlist"
+                            data-readdy="true">
+                            <button
+                                class="bg-primary text-white px-6 py-3 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all flex items-center justify-center">
+                                Go to Dashboard
+                                <i class="ri-arrow-right-line ml-2"></i>
+                            </button>
+                        </a>
+                
+            <?php
+                }else{
+            ?>
+                <a href="cardlist"
                             data-readdy="true">
                             <button
                                 class="bg-primary text-white px-6 py-3 !rounded-button whitespace-nowrap font-medium hover:bg-opacity-90 transition-all flex items-center justify-center">
@@ -143,6 +186,10 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
                                 <i class="ri-arrow-right-line ml-2"></i>
                             </button>
                         </a>
+                
+            <?php        
+                }
+            ?>
 
                     </div>
                 </div>
@@ -268,90 +315,6 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             </div>
         </div>
     </section>
-    <section class="py-20 bg-primary bg-opacity-5">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4" style="font-family: 'Agbalumo', sans-serif;">What Our
-                    Users Say</h2>
-                <p class="text-lg text-gray-700 max-w-2xl mx-auto">Join thousands of satisfied users who have simplified
-                    their group logistics with PackPal.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 back1">
-                <div class="bg-white p-8 rounded-lg shadow-sm">
-                    <div class="flex items-center mb-4">
-                        <div class="text-primary">
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"PackPal saved our family vacation! With four kids and two
-                        grandparents, keeping track of everything was a nightmare until we found this app. Now everyone
-                        knows exactly what they need to bring."</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-200 rounded-full mr-4 overflow-hidden">
-                            <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20middle-aged%20woman%20with%20short%20brown%20hair%20and%20glasses%2C%20smiling%20warmly%20at%20the%20camera.%20The%20image%20has%20a%20plain%20light%20background%20and%20is%20cropped%20to%20show%20just%20the%20face%20and%20shoulders.%20The%20photo%20has%20natural%20lighting%20and%20a%20professional%20appearance.&width=100&height=100&seq=user1&orientation=squarish"
-                                alt="Jennifer Wilson" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Jennifer Wilson</h4>
-                            <p class="text-sm text-gray-500">Family Trip Organizer</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-sm">
-                    <div class="flex items-center mb-4">
-                        <div class="text-primary">
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"As an event planner, I need to coordinate multiple vendors and team
-                        members. PackPal makes it simple to assign tasks, track progress, and ensure nothing falls
-                        through the cracks."</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-200 rounded-full mr-4 overflow-hidden">
-                            <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20young%20Black%20man%20in%20his%20early%2030s%20wearing%20a%20business%20casual%20outfit%20with%20a%20confident%20smile.%20The%20image%20has%20a%20plain%20light%20background%20and%20is%20cropped%20to%20show%20just%20the%20face%20and%20shoulders.%20The%20photo%20has%20natural%20lighting%20and%20a%20professional%20appearance.&width=100&height=100&seq=user2&orientation=squarish"
-                                alt="Marcus Johnson" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Marcus Johnson</h4>
-                            <p class="text-sm text-gray-500">Professional Event Planner</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-8 rounded-lg shadow-sm">
-                    <div class="flex items-center mb-4">
-                        <div class="text-primary">
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-half-fill"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"Our hiking group uses PackPal for all our weekend adventures. The
-                        templates feature is fantastic - we just customize our standard gear list based on weather and
-                        terrain. Highly recommended!"</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-200 rounded-full mr-4 overflow-hidden">
-                            <img src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20an%20Asian%20woman%20in%20her%20late%2020s%20with%20long%20black%20hair%20and%20a%20friendly%20smile.%20The%20image%20has%20a%20plain%20light%20background%20and%20is%20cropped%20to%20show%20just%20the%20face%20and%20shoulders.%20The%20photo%20has%20natural%20lighting%20and%20a%20professional%20appearance.&width=100&height=100&seq=user3&orientation=squarish"
-                                alt="Sophia Chen" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Sophia Chen</h4>
-                            <p class="text-sm text-gray-500">Outdoor Adventure Leader</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section
         class="py-20 bg-primary bg-opacity-4 text-white w-[90%] mx-auto rounded-lg shadow-lg relative overflow-hidden back">
         <div class="container mx-auto px-6 text-center">
@@ -360,71 +323,36 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of organized travelers and event planners who trust
                 PackPal.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="cardlist.php"
+
+                <?php 
+                if(isset($_SESSION['pacpal_logedin_user_id'])) {
+            ?>
+            <a href="cardlist"
+                    class="bg-white border-2 border-white text-primary px-8 py-3 !rounded-button whitespace-nowrap font-medium hover:border-white hover:bg-primary hover:border-2 hover:text-white transition-all flex items-center justify-center">
+                    Go To Dashboard
+                    <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+                
+                
+            <?php
+                }else{
+            ?>
+                <a href="cardlist"
                     class="bg-white border-2 border-white text-primary px-8 py-3 !rounded-button whitespace-nowrap font-medium hover:border-white hover:bg-primary hover:border-2 hover:text-white transition-all flex items-center justify-center">
                     Get Started for Free
                     <i class="ri-arrow-right-line ml-2"></i>
                 </a>
+                
+            <?php        
+                }
+            ?>
+
+
             </div>
         </div>
     </section>
-    <footer class="bg-gray-50 pt-16 pb-8">
+    <footer class="bg-gray-50 pt-6 pb-8">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                <div>
-                    <h3 class="text-xl font-['Pacifico'] text-primary mb-4">PackPal</h3>
-                    <p class="text-gray-600 mb-4">Simplifying group logistics since 2023. Our mission is to make group
-                        travel and event planning stress-free.</p>
-                    <div class="flex space-x-4">
-                        <a href="#"
-                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-primary hover:text-white transition-all">
-                            <i class="ri-facebook-fill"></i>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-primary hover:text-white transition-all">
-                            <i class="ri-twitter-x-fill"></i>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-primary hover:text-white transition-all">
-                            <i class="ri-instagram-fill"></i>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-primary hover:text-white transition-all">
-                            <i class="ri-linkedin-fill"></i>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-900 mb-4">Product</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Features</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Pricing</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Templates</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Mobile App</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Integrations</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-900 mb-4">Resources</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Help Center</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Blog</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Guides</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Events</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Community</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-gray-900 mb-4">Company</h4>
-                    <ul class="space-y-2">
-                        <li><a href="about" class="text-gray-600 hover:text-primary">About Us</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Careers</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Press</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Contact</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary">Partners</a></li>
-                    </ul>
-                </div>
-            </div>
             <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 PackPal. All rights reserved.</p>
                 <div class="flex flex-wrap justify-center gap-4">

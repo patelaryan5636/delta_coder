@@ -100,7 +100,7 @@ if (mysqli_num_rows($checkAdmin) == 0) {
 
     button,
     input[type="submit"] {
-      background: linear-gradient(135deg, rgb(90, 109, 113) 0%, rgb(113, 130, 133) 100%);
+      background: #96b4b4;
       width: 100%;
       color: #fff;
       border: none;
@@ -130,6 +130,15 @@ if (mysqli_num_rows($checkAdmin) == 0) {
       width: 100%;
       padding: 10px 0px;
     }
+    .back{
+    background: #96b4b4;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
   </style>
 </head>
 
@@ -138,7 +147,10 @@ if (mysqli_num_rows($checkAdmin) == 0) {
 
     <div class="form-card">
       <form action="process_checklist.php" method="POST">
-        <h2><i class="fa-solid fa-list-check"></i>&nbsp;Crate a Checklist</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h2><i class="fa-solid fa-list-check"></i>&nbsp;Crate a Checklist</h2>
+          <a href="cardlist" class="back">&lAarr; Back</a>
+        </div>
         <input type="hidden" name="group_id" value="<?= $group_id ?>">
 
         <div class="form-group">

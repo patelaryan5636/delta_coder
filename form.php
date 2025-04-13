@@ -183,13 +183,26 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
       width: 100%;
     }
   }
+
+  .back{
+    background: #96b4b4;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
 </style>
 
 <body>
   <form action="insert_group.php" method="POST" id="groupForm"
     style="max-width: 55%; margin: auto; font-family: Arial, sans-serif; border: 1px solid #ccc; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-    <h2 style="text-align: center; color: #333; font-family: 'Agbalumo', sans-serif !important; font-size: 3vw;">Create
-      New Group</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="text-align: center; color: #333; font-family: 'Agbalumo', sans-serif !important; font-size: 3vw;">Create
+        New Group</h2>
+      <a href="cardlist" class="back">&lAarr; Back</a>
+    </div>
 
     <div style="margin-bottom: 15px;">
       <label for="group_name" style="display: block; font-weight: bold; margin-bottom: 5px;">Group Name:</label>
