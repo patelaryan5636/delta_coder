@@ -90,29 +90,16 @@
 </head>
 
 <body>
-    <nav class="nav-container">
-        <div class="nav-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 flex justify-between items-center">
-            <a href="#" class="logo">PackPal</a>
-            <div class="flex items-center space-x-4">
-                <a href="#" class="nav-button bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap">
-                    Dashboard
-                </a>
-                <div class="profile-container">
-                    <a href="profile"
-                        class="nav-button bg-gray-100 hover:bg-gray-200 p-2 !rounded-full w-10 h-10 flex items-center justify-center">
-                        <i class="ri-user-line ri-lg"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php
+            include("navbar.php");
+    ?>
     <main
         class="min-h-[calc(100vh-8rem)] w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex items-center justify-center">
         <div class="bg-white rounded-lg shadow-sm p-6 md:p-8 w-full">
             <div class="flex justify-between items-center mb-8">
                 <h1 class="text-2xl font-semibold text-gray-800">My Profile</h1>
-                <a href="logout" class="flex items-center text-primary hover:text-primary/80 transition-colors font-bold">
-                    <i class="ri-edit-line mr-1"></i> Logout
+                <a href="logout" class="text-2xl flex items-center text-primary hover:text-primary/80 transition-colors font-bold">
+                    Logout
                 </a>
             </div>
             <div class="flex flex-col items-center mb-8">

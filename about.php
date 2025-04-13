@@ -2,30 +2,16 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About PackPal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'packpal-teal': '#8CC9BE',
-                        'packpal-dark-teal': '#5BA69B',
-                        'packpal-navy': '#2A384D',
-                        'packpal-light-gray': '#F4F6F8',
-                        'packpal-gray': '#A0A9B8',
-                    },
-                    fontFamily: {
-                        'display': ['Poppins', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <title>PackPal - Group Logistics Organizer</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#96b4b4', secondary: '#c4dfdf' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -87,97 +73,64 @@
         .animate-slide-up {
             animation: slide-up 0.3s ease-in;
         }
+
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        .nav-container {
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Pacifico', serif;
+            color: #88ABA5;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-button {
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover {
+            filter: brightness(0.95);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-container:hover .logout-button {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            .nav-content {
+                padding: 0.75rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 
 <body class="min-h-screen bg-white font-display">
     <!-- Navbar -->
-    <nav class="bg-white shadow-sm py-4 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <a href="/" class="flex items-center">
-                        <a href="index" class="text-packpal-navy font-bold text-2xl">
-                            <span class="text-packpal-teal">Pack</span>Pal
-                        </a>
-                    </a>
-                </div>
-
-                <!-- Desktop navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="text-gray-600 hover:text-packpal-teal transition-colors">
-                        Features
-                    </a>
-                    <a href="#" class="text-gray-600 hover:text-packpal-teal transition-colors">
-                        Pricing
-                    </a>
-                    <a href="#" class="text-gray-600 hover:text-packpal-teal transition-colors">
-                        Resources
-                    </a>
-                    <a href="/about"
-                        class="text-packpal-teal font-medium hover:text-packpal-dark-teal transition-colors">
-                        About
-                    </a>
-                    <button
-                        class="text-gray-600 text-packpal-teal bg-gray-100 px-4 py-2 rounded-md hover:bg-gray-400 hover:text-white transition-colors">
-                        Sign In
-                    </button>
-                    <button
-                        class="bg-packpal-teal hover:bg-packpal-dark-teal text-white px-4 py-2 rounded-md transition-colors">
-                        Sign Up
-                    </button>
-                </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="menuToggle" class="text-gray-500 hover:text-packpal-teal focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            id="menuIcon">
-                            <line x1="3" y1="12" x2="21" y2="12"></line>
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <line x1="3" y1="18" x2="21" y2="18"></line>
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="hidden" id="closeIcon">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile navigation -->
-            <div class="md:hidden mt-4 pt-4 pb-4 border-t border-gray-200 hidden" id="mobileMenu">
-                <div class="flex flex-col space-y-4">
-                    <a href="#" class="text-gray-600 text-center hover:text-packpal-teal transition-colors">
-                        Features
-                    </a>
-                    <a href="#" class="text-gray-600 text-center hover:text-packpal-teal transition-colors">
-                        Pricing
-                    </a>
-                    <a href="#" class="text-gray-600 text-center hover:text-packpal-teal transition-colors">
-                        Resources
-                    </a>
-                    <a href="/about"
-                        class="text-packpal-teal text-center font-medium hover:text-packpal-dark-teal transition-colors">
-                        About
-                    </a>
-                    <div class="flex flex-col space-y-2 pt-4">
-                        <button
-                            class="text-gray-600 text-packpal-teal bg-gray-100 px-4 py-2 rounded-md hover:bg-gray-400 hover:text-white transition-colors">
-                            Sign In
-                        </button>
-                        <button
-                            class="bg-packpal-teal hover:bg-packpal-dark-teal text-white px-4 py-2 rounded-md transition-colors">
-                            Sign Up
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php
+            include("navbar.php");
+    ?>
 
     <!-- Hero Section -->
     <section class="bg-gradient-to-b from-packpal-light-gray to-white">
