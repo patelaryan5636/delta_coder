@@ -1,4 +1,4 @@
- sdfjbd <?php
+<?php
 session_start();
 require_once 'includes/scripts/connection.php';
 if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedin_user_id']) !== '')){
@@ -303,12 +303,12 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <?php
+                
+                <?php
             }
-          }
-          ?>
+        }
+        ?>
+    </div>
             <!-- Card 1 -->
         </div>
 
