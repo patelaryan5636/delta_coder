@@ -9,6 +9,7 @@
       $userdata = mysqli_fetch_assoc($result);
       $user_role = $userdata["user_role"];
       $full_name = $userdata['full_name'];
+      $user_name = $userdata['user_name'];
   }
 
 ?>
@@ -130,8 +131,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
             </a>
             <div class="profile-container">
                 <a href="profile"
-                    class="nav-button bg-gray-100 hover:bg-gray-200 p-2 !rounded-full w-10 h-10 flex items-center justify-center">
-                    <i class="ri-user-line ri-lg"></i>
+                    class="nav-button bg-gray-100 hover:bg-gray-200 px-3 !rounded-full w-auto h-10 flex items-center justify-center">
+                    <i class="ri-user-line ri-lg"></i>&nbsp;<?php echo $user_name ?>
                 </a>
             </div>
             <?php
