@@ -1,3 +1,31 @@
+<?php
+session_start();
+include("includes/scripts/connection.php");
+
+if (!isset($_SESSION['pacpal_logedin_user_id'])) {
+    die("Unauthorized access");
+}
+
+$user_id = $_SESSION['pacpal_logedin_user_id'];
+$success = false;
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+
+    $update_sql = "UPDATE user_master SET user_name='$username', full_name='$fullname', phone='$phone' WHERE user_id = $user_id";
+    if (mysqli_query($conn, $update_sql)) {
+        $success = true;
+    }
+}
+
+// Fetch current user data
+$sql = "SELECT user_name, email, full_name, phone FROM user_master WHERE user_id = $user_id";
+$result = mysqli_query($conn, $sql);
+$user = mysqli_fetch_assoc($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,57 +117,63 @@
     </style>
 </head>
 
+
 <body>
-    <?php
-            include("navbar.php");
-    ?>
-    <main
-        class="min-h-[calc(100vh-8rem)] w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-sm p-6 md:p-8 w-full">
-            <div class="flex justify-between items-center mb-8">
-                <h1 class="text-2xl font-semibold text-gray-800">My Profile</h1>
-                <a href="logout" class="text-2xl flex items-center text-primary hover:text-primary/80 transition-colors font-bold">
-                    Logout
-                </a>
-            </div>
-            <div class="flex flex-col items-center mb-8">
-                <div class="w-24 h-24 flex items-center justify-center rounded-full bg-primary/10 mb-4">
-                    <span class="text-4xl font-medium text-primary">A</span>
-                </div>
-                <h2 id="displayUsername" class="text-5xl font-medium text-gray-800" style="font-family: 'Agbalumo', sans-serif;">aryan5636</h2>
-            </div>
-            <form class="space-y-6" action="#" method="POST">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                        <input type="text" id="username" name="username" value="aryan5636"
-                            class="w-full px-4 py-3 border border-gray-300 rounded text-gray-800 focus:border-primary">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" id="email" name="email" value="patelaryan5636@gmail.com" disabled
-                            class="w-full px-4 py-3 border border-gray-300 rounded text-gray-500">
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                        <input type="text" id="fullname" name="fullname" value="Aryan Patel"
-                            class="w-full px-4 py-3 border border-gray-300 rounded text-gray-800 focus:border-primary">
-                    </div>
-                    <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" value="6353054338"
-                            class="w-full px-4 py-3 border border-gray-300 rounded text-gray-800 focus:border-primary">
-                    </div>
-                </div>
-                <div class="pt-4">
-                    <input type="submit"
-                        class="w-full bg-primary text-white py-3 px-4 rounded-button hover:bg-[#849E96] transition-colors font-medium" style="cursor: pointer;" value="Save Changes">
-                </div>
-            </form>
+<?php include("navbar.php"); ?>
+<main class="min-h-[calc(100vh-8rem)] w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-sm p-6 md:p-8 w-full">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-semibold text-gray-800">My Profile</h1>
+            <a href="logout" class="text-2xl flex items-center text-primary hover:text-primary/80 transition-colors font-bold">
+                Logout
+            </a>
         </div>
-    </main>
+
+        <?php if ($success): ?>
+        <div class="mb-4 p-4 bg-green-100 text-green-800 rounded">Profile updated successfully!</div>
+        <?php endif; ?>
+
+        <div class="flex flex-col items-center mb-8">
+            <div class="w-24 h-24 flex items-center justify-center rounded-full bg-primary/10 mb-4">
+                <span class="text-4xl font-medium text-primary"><?= strtoupper($user['full_name'][0]) ?></span>
+            </div>
+            <h2 id="displayUsername" class="text-5xl font-medium text-gray-800" style="font-family: 'Agbalumo', sans-serif;">
+                <?= htmlspecialchars($user['user_name']) ?>
+            </h2>
+        </div>
+
+        <form class="space-y-6" action="" method="POST">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                    <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['user_name']) ?>"
+                        class="w-full px-4 py-3 border border-gray-300 rounded text-gray-800 focus:border-primary">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" disabled
+                        class="w-full px-4 py-3 border border-gray-300 rounded text-gray-500">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" value="<?= htmlspecialchars($user['full_name']) ?>"
+                        class="w-full px-4 py-3 border border-gray-300 rounded text-gray-800 focus:border-primary">
+                </div>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" value="<?= htmlspecialchars($user['phone']) ?>"
+                        class="w-full px-4 py-3 border border-gray-300 rounded text-gray-800 focus:border-primary">
+                </div>
+            </div>
+            <div class="pt-4">
+                <input type="submit"
+                    class="w-full bg-primary text-white py-3 px-4 rounded-button hover:bg-[#849E96] transition-colors font-medium" style="cursor: pointer;" value="Save Changes">
+            </div>
+        </form>
+    </div>
+</main>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const usernameInput = document.getElementById('username');
