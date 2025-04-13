@@ -87,11 +87,23 @@
                 font-family: 'Agbalumo', sans-serif;
                 text-align: center;
             }
+            .back {
+                font-size: 1.5vw;
+                padding: 5px 20px;
+                background-color:rgba(54, 103, 113, 0.68);
+                color: white;
+                text-decoration: none;
+                border-radius: 8px;
+                transition: background-color 0.3s ease;
+            }
         </style>
     </head>
     <body class="bg-gray-50 min-h-screen">
         <div class="max-w-7xl mx-auto p-4 sm:p-6">
-            <h1 class="title pb-4">Tack Your Tasks</h1>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h1 class="title pb-4">Tack Your Tasks</h1>
+                <a href="cardlist" class="back">Back</a>
+            </div>
             <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">

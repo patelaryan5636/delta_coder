@@ -101,25 +101,63 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
             /* Span all columns */
             text-align: center;
         }
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        .nav-container {
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Pacifico', serif;
+            color: #88ABA5;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-button {
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover {
+            filter: brightness(0.95);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-container:hover .logout-button {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            .nav-content {
+                padding: 0.75rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50 backdrop-blur-sm bg-white/90">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-14 sm:h-16">
-                <div class="flex items-center">
-                    <a href="index" class="text-2xl font-['Pacifico'] text-primary">Packpal </a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="relative w-10 h-10 flex items-center justify-center rounded-full bg-gray-100">
-                        <i class="ri-user-line text-gray-600"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php
+            include("navbar.php");
+    ?>
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         <!-- Header -->
