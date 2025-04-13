@@ -228,11 +228,11 @@ document.getElementById('add-member').addEventListener('click', function() {
                 <option value="<?= $user['user_id'] ?>"><?= $user['user_name'] ?></option>
             <?php endforeach; ?>
         </select>
-        <select name="roles[]" class="form-select ml-2">
-            <option value="Owner">Owner</option>
-            <option value="Admin">Admin</option>
-            <option value="Editor">Editor</option>
-            <option value="Viewer">Viewer</option>
+       <select name="roles[]" class="form-select ml-2">
+            <option value="Owner" ${$member['role'] === 'Owner' ? 'selected' : ''}>Owner</option>
+            <option value="Admin" ${$member['role'] === 'Admin' ? 'selected' : ''}>Admin</option>
+            <option value="Editor" ${$member['role'] === 'Editor' ? 'selected' : ''}>Editor</option>
+            <option value="Viewer" ${$member['role'] === 'Viewer' ? 'selected' : ''}>Viewer</option>
         </select>
         <button type="button" class="ml-2 text-red-600 remove-member">Remove</button>
     `;
