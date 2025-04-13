@@ -6,6 +6,8 @@ if (!isset($_SESSION['pacpal_logedin_user_id'])) {
     die("Unauthorized access");
 }
 
+$group_id = $_GET['id'];
+
 $user_id = $_SESSION['pacpal_logedin_user_id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -33,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $update->bind_param("ssi", $status, $note, $item_id);
     $update->execute();
 
-    header("Location: checklist_view.php?group_id=" . $_POST['group_id']);
+    header("Location: checklist_member_view.php?group_id=" . $group_id);
     // header("Location: checklist_member_view.php?group_id=" . $_GET['group_id']);
     exit;
 } else {

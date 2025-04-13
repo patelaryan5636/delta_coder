@@ -172,6 +172,7 @@ while ($u = $usersResult->fetch_assoc()) {
     }
 </style>
 <body>
+
 <form action="update_group.php" method="POST" style="max-width: 55%; margin: auto; font-family: Arial, sans-serif; border: 1px solid #ccc; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 <h2 style="text-align: center; color: #333; font-family: 'Agbalumo', sans-serif !important; font-size: 3vw;">Create New Group</h2>
     <input type="hidden" name="group_id" value="<?= $group['group_id'] ?>">
@@ -199,6 +200,7 @@ while ($u = $usersResult->fetch_assoc()) {
             </select>
 
             <select name="roles[]" class="form-select ml-2">
+                <option value="Owner" <?= $member['role'] == 'Owner' ? 'selected' : '' ?>>Owner</option>
                 <option value="Admin" <?= $member['role'] == 'Admin' ? 'selected' : '' ?>>Admin</option>
                 <option value="Editor" <?= $member['role'] == 'Editor' ? 'selected' : '' ?>>Editor</option>
                 <option value="Viewer" <?= $member['role'] == 'Viewer' ? 'selected' : '' ?>>Viewer</option>
@@ -227,6 +229,7 @@ document.getElementById('add-member').addEventListener('click', function() {
             <?php endforeach; ?>
         </select>
         <select name="roles[]" class="form-select ml-2">
+            <option value="Owner">Owner</option>
             <option value="Admin">Admin</option>
             <option value="Editor">Editor</option>
             <option value="Viewer">Viewer</option>

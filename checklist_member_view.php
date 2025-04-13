@@ -309,8 +309,15 @@ $role = mysqli_fetch_assoc($role_result);
             $total_tasks = mysqli_fetch_assoc($count_result)['total'];
             echo $total_tasks . ' ' . ($total_tasks == 1 ? 'Task' : 'Tasks');
             ?>
+<<<<<<< Updated upstream
         </div>
     </div>
+=======
+            <form method="post" action="update_task_status.php?id=<?= $group_id ?>">
+                <div class="task-card">
+                    <strong>Task:</strong> <?= htmlspecialchars($task['item_name']) ?><br>
+                    <strong>Category:</strong> <?= htmlspecialchars($task['category_name']) ?><br>
+>>>>>>> Stashed changes
 
     <div class="task-list">
         <?php

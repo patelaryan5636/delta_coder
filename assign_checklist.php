@@ -11,9 +11,9 @@ $user_id = $_SESSION['pacpal_logedin_user_id'];
 $group_id = $_GET['group_id'] ?? null;
 
 // Check if the user is admin in the group
-$checkAdmin = mysqli_query($conn, "SELECT * FROM user_group_roles WHERE user_id = $user_id AND group_id = $group_id AND role = 'admin'");
+$checkAdmin = mysqli_query($conn, "SELECT * FROM user_group_roles WHERE user_id = $user_id AND group_id = $group_id AND (role = 'Admin' OR role = 'Owner')");
 if (mysqli_num_rows($checkAdmin) == 0) {
-    die("<script>alert('Only Admins can assign tasks.'); window.location.href='dashboard.php';</script>");
+    die("<script>alert('Only Admins can assign tasks.'); window.location.href='cardlist.php';</script>");
 }
 ?>
 

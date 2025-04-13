@@ -214,27 +214,92 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
                         </div>
                     </div>
                     <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <a href="assign_checklist.php?group_id=<?= $group_id ?>"
-                            class="btn bg-primary text-white px-2 py-2 rounded-button flex items-center whitespace-nowrap shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30">
-                            <i class="fa-solid fa-list-check"></i>&nbsp;Create Checklist
-                        </a>
-                        <div class="flex space-x-2">
-                            <a href="add_category.php?group_id=<?= $group_id ?>"
-                                class="btn bg-orange-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
-                                <i class="fa-solid fa-plus"></i>
+                    <?php
+                        $roleQ = $conn->query("SELECT role FROM user_group_roles WHERE user_id = '$user_id' AND group_id = '$group_id'");
+                        $roleRow = $roleQ->fetch_assoc();
+                        $role = strtolower($roleRow['role']);
+                        $isPrivileged = ($role === 'owner' || $role === 'admin');
+                        ?>
+
+                        <!-- Create Checklist Button -->
+                        <?php if ($isPrivileged): ?>
+                            <a href="assign_checklist.php?group_id=<?= $group_id ?>"
+                                class="btn bg-primary text-white px-2 py-2 rounded-button flex items-center whitespace-nowrap shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30">
+                                <i class="fa-solid fa-list-check"></i>&nbsp;Create Checklist
                             </a>
-                            <a href="editgroup.php?id=<?= $group_id ?>"
-                                class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
+                        <?php else: ?>
+                            <a href="javascript:void(0)"
+                                class="btn bg-gray-200 text-gray-400 px-2 py-2 rounded-button flex items-center whitespace-nowrap cursor-not-allowed"
+                                title="Only Owner or Admin can create checklist">
+                                <i class="fa-solid fa-list-check"></i>&nbsp;Create Checklist
+                            </a>
+                        <?php endif; ?>
+                        
+                        <!-- Add Category Button -->
+                        <div class="flex space-x-2">
+                            <?php if ($isPrivileged): ?>
+                                <a href="add_category.php?group_id=<?= $group_id ?>"
+                                    class="btn bg-orange-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
+                            <?php else: ?>
+                                <a href="javascript:void(0)"
+                                    class="btn bg-gray-200 text-gray-400 w-9 h-9 rounded-button flex items-center justify-center cursor-not-allowed"
+                                    title="Only Owner or Admin can add categories">
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                            <?php
+                                $roleQ = $conn->query("SELECT role FROM user_group_roles WHERE user_id = '$user_id' AND group_id = '$group_id'");
+                                $roleRow = $roleQ->fetch_assoc();
+
+                                $isOwner = false;
+
+                                if ($roleRow && strtolower($roleRow['role']) === 'owner') {
+                                    $isOwner = true;
+                                }
+                            ?>
+                            <a 
+                                href="<?= $isOwner ? "editgroup.php?id=$group_id" : 'javascript:void(0);' ?>" 
+                                class="btn <?= $isOwner ? 'bg-gray-100 text-gray-700' : 'bg-gray-200 text-gray-400 cursor-not-allowed' ?> w-9 h-9 rounded-button flex items-center justify-center"
+                                <?= $isOwner ? '' : 'onclick="return false;" title=\'Only the Owner can edit\'' ?>
+                            >
                                 <i class="ri-edit-line"></i>
                             </a>
-                            <a href="checklist_view.php?group_id=<?= $group_id ?>"
+                           
+
+                            <?php
+                            $roleQ = $conn->query("SELECT role FROM user_group_roles WHERE user_id = '$user_id' AND group_id = '$group_id'");
+                            $roleRow = $roleQ->fetch_assoc();
+
+                            $redirectURL = "checklist_view.php?group_id=$group_id"; // default
+
+                            if ($roleRow) {
+                                $role = strtolower($roleRow['role']);
+                                if ($role === 'viewer') {
+                                    $redirectURL = "checklist_viewer_view.php?group_id=$group_id";
+                                } elseif ($role === 'member') {
+                                    $redirectURL = "checklist_member_view.php?group_id=$group_id";
+                                }
+                            }
+                            ?>
+                            <a href="<?= $redirectURL ?>"
                                 class="btn bg-gray-100 text-gray-700 w-9 h-9 rounded-button flex items-center justify-center">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
-                            <button
+
+                            <a href="<?= $isOwner ? 'delete_group.php?group_id=' . $group_id : 'javascript:void(0);' ?>"
+                               <?= $isOwner ? '' : 'title="Only the Owner can delete"' ?>
+                               class="btn w-9 h-9 rounded-button flex items-center justify-center
+                                      <?= $isOwner ? 'bg-red-50 text-red-600' : 'bg-gray-200 text-gray-400 cursor-not-allowed pointer-events-none' ?>">
+                                <i class="ri-delete-bin-line"></i>
+                            </a>
+                            
+                            <!-- <button
                                 class="btn bg-red-50 text-red-600 w-9 h-9 rounded-button flex items-center justify-center">
                                 <i class="ri-delete-bin-line"></i>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </div>
