@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $update->bind_param("ssi", $status, $note, $item_id);
     $update->execute();
 
-    header("Location: checklist_member_view.php?group_id=" . $group_id);
+    header("Location: cardlist.php");
     // header("Location: checklist_member_view.php?group_id=" . $_GET['group_id']);
     exit;
 } else {
