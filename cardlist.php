@@ -12,7 +12,7 @@ if(isset($_SESSION['pacpal_logedin_user_id']) && (trim ($_SESSION['pacpal_logedi
   }
 } else {
   header("Location: sign-in.php");
-}
+}   
 ?>
 <!DOCTYPE html>
 <html lang="en">

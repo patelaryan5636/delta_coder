@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PackPal Navigation</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#88ABA5', secondary: '#6A8D87' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-family: 'Pacifico', serif;
+            color: #88ABA5;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-button {
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover {
+            filter: brightness(0.95);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-container:hover .logout-button {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            .nav-content {
+                padding: 0.75rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <nav class="nav-container bg-white">
+        <div class="nav-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="logo">PackPal</a>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="nav-button bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap">
+                    Dashboard
+                </a>
+                <div class="profile-container">
+                    <button onclick="window.location.href='profile.php'"
+                        class="nav-button bg-gray-100 hover:bg-gray-200 p-2 !rounded-full w-10 h-10 flex items-center justify-center">
+                        <i class="ri-user-line ri-lg"></i>
+                    </button>
+                    <div class="logout-button bg-white p-2 !rounded-button whitespace-nowrap">
+                        <a href="#"
+                            class="nav-button flex items-center px-4 py-2 text-red-600 hover:bg-red-50 !rounded-button">
+                            <i class="ri-logout-box-line ri-lg mr-2"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+
+</html>
