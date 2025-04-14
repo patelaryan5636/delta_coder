@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $is_verified = 0; // Initially not verified
             // OTP is correct, insert user into user_master
                 $insertStmt = $conn->prepare("INSERT INTO `user_master`(`user_name`, `email`, `password`, `user_role`, `joined_date`, `full_name`, `phone`, `is_verified`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-                $insertStmt->bind_param("sssisiii", $username, $email, $password, $user_role, $joined_date, $fullname, $mobile, $is_verified);
+                $insertStmt->bind_param("sssissii", $username, $email, $password, $user_role, $joined_date, $fullname, $mobile, $is_verified);
 
             if ($insertStmt->execute()) {
                 // Delete OTP record after successful verification
